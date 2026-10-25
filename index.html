@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kurikulum Soft Skill Tematik | NDC Learning</title>
+<meta name="description" content="Kurikulum Soft Skill Tematik NDC Learning: 6 tema × 4 modul, dilengkapi narasi suara.">
+<style>
+  :root{
+    --navy:#0b2545; --blue:#13579b; --sky:#1f8fe0; --gold:#f2b134;
+    --bg:#f4f7fb; --card:#ffffff; --text:#1c2733; --muted:#5b6b7c; --line:#dfe6ee;
+    --hl:#fff6dd;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;font-family:"Segoe UI",Roboto,Arial,sans-serif;background:var(--bg);color:var(--text);line-height:1.6;padding-bottom:96px}
+  a{color:var(--blue)}
+
+  /* ---------- Pembuka (splash) ---------- */
+  #splash{position:fixed;inset:0;z-index:50;display:flex;align-items:center;justify-content:center;
+    background:radial-gradient(circle at 30% 20%,#1d6fc0 0%,var(--navy) 65%);color:#fff;text-align:center;padding:24px;transition:opacity .6s}
+  #splash.hide{opacity:0;pointer-events:none}
+  .splash-inner{max-width:560px;animation:rise .9s ease-out}
+  .splash-inner .logo{width:150px;height:150px;margin:0 auto 18px;filter:drop-shadow(0 8px 24px rgba(0,0,0,.35));animation:spin-in 1.2s ease-out}
+  .splash-inner h1{font-size:clamp(24px,5vw,36px);margin:6px 0 4px}
+  .splash-inner .community{letter-spacing:.5px;opacity:.9;margin:0}
+  .splash-inner .tagline{color:var(--gold);font-weight:600;letter-spacing:2px;margin:10px 0 4px}
+  .splash-inner .slogan{font-style:italic;opacity:.85;margin:0 0 26px}
+  .splash-inner .sub{opacity:.9;margin:0 0 22px}
+  .btn{border:0;border-radius:999px;padding:12px 22px;font-size:15px;font-weight:600;cursor:pointer;transition:transform .15s,background .15s}
+  .btn:hover{transform:translateY(-1px)}
+  .btn-gold{background:var(--gold);color:var(--navy)}
+  .btn-ghost{background:transparent;color:#fff;border:1.5px solid rgba(255,255,255,.6);margin-left:8px}
+  .splash-note{font-size:12px;opacity:.7;margin-top:18px}
+  @keyframes rise{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:none}}
+  @keyframes spin-in{from{opacity:0;transform:rotate(-90deg) scale(.6)}to{opacity:1;transform:none}}
+
+  /* ---------- Header ---------- */
+  header.top{background:var(--navy);color:#fff}
+  .top-inner{max-width:1080px;margin:0 auto;padding:14px 16px;display:flex;align-items:center;gap:12px}
+  .top-inner .logo{width:44px;height:44px;flex:none}
+  .brand b{display:block;font-size:17px}
+  .brand span{font-size:12px;opacity:.8}
+  .hero{background:linear-gradient(135deg,var(--blue),var(--navy));color:#fff}
+  .hero-inner{max-width:1080px;margin:0 auto;padding:36px 16px 40px}
+  .hero h1{margin:0 0 8px;font-size:clamp(24px,4.5vw,36px)}
+  .hero p{margin:0;max-width:720px;opacity:.92}
+  .stats{display:flex;flex-wrap:wrap;gap:12px;margin-top:22px}
+  .stat{background:rgba(255,255,255,.12);border-radius:12px;padding:10px 16px;min-width:120px}
+  .stat b{display:block;font-size:22px;color:var(--gold)}
+  .stat span{font-size:13px;opacity:.9}
+
+  nav.toc{position:sticky;top:0;z-index:20;background:#fff;border-bottom:1px solid var(--line);overflow-x:auto;white-space:nowrap}
+  nav.toc .wrap{max-width:1080px;margin:0 auto;padding:8px 16px;display:flex;gap:6px}
+  nav.toc a{display:inline-block;padding:6px 12px;border-radius:999px;text-decoration:none;color:var(--muted);font-size:13px;font-weight:600}
+  nav.toc a:hover,nav.toc a.active{background:#e7f0fa;color:var(--blue)}
+
+  main{max-width:1080px;margin:0 auto;padding:8px 16px}
+  section.block{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:22px;margin:20px 0;scroll-margin-top:60px;transition:box-shadow .3s,background .3s}
+  section.block.speaking{background:var(--hl);box-shadow:0 0 0 3px var(--gold)}
+  .sec-head{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;flex-wrap:wrap}
+  .sec-head h2{margin:0;font-size:22px;color:var(--navy)}
+  .sec-head .eyebrow{display:block;font-size:12px;font-weight:700;letter-spacing:1px;color:var(--sky);text-transform:uppercase}
+  .listen{background:#e7f0fa;color:var(--blue);border:0;border-radius:999px;padding:8px 14px;font-weight:600;font-size:13px;cursor:pointer;white-space:nowrap}
+  .listen:hover{background:#d6e6f7}
+  .lead{color:var(--muted);margin:10px 0 16px}
+
+  .table-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:12px}
+  table{border-collapse:collapse;width:100%;font-size:14px;min-width:560px}
+  th,td{padding:10px 12px;text-align:left;vertical-align:top;border-bottom:1px solid var(--line)}
+  th{background:#eef3f9;color:var(--navy);font-size:13px}
+  tr:last-child td{border-bottom:0}
+  td.code{font-weight:700;color:var(--blue);white-space:nowrap}
+
+  .levels{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px}
+  .level{border-radius:12px;padding:14px;border:1px solid var(--line);background:#fafcff}
+  .level .n{display:inline-flex;width:30px;height:30px;border-radius:50%;align-items:center;justify-content:center;background:var(--blue);color:#fff;font-weight:700;margin-bottom:6px}
+  .level b{display:block;color:var(--navy)}
+  .level p{margin:4px 0 0;font-size:14px;color:var(--muted)}
+
+  .themes{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:10px;margin-top:16px}
+  .theme-chip{display:flex;gap:10px;align-items:center;padding:12px;border-radius:12px;background:#f4f8fd;border:1px solid var(--line);text-decoration:none;color:var(--navy);font-weight:600;font-size:14px}
+  .theme-chip .ic{font-size:22px}
+
+  .modules{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px}
+  .mod{border:1px solid var(--line);border-radius:12px;padding:14px;background:#fff;position:relative}
+  .mod .tag{font-size:11px;font-weight:700;letter-spacing:.5px;padding:3px 8px;border-radius:999px;background:#e7f0fa;color:var(--blue)}
+  .mod .tag.l4{background:#fff1d1;color:#8a5a00}
+  .mod h3{margin:8px 0 6px;font-size:16px;color:var(--navy)}
+  .mod .kode{font-weight:700;color:var(--sky);font-size:13px}
+  .mod dl{margin:8px 0 0;font-size:13.5px}
+  .mod dt{font-weight:700;color:var(--muted);font-size:12px;margin-top:6px}
+  .mod dd{margin:0}
+
+  ul.clean{padding-left:20px;margin:10px 0 0}
+  .note{background:#f4f8fd;border-left:4px solid var(--sky);padding:10px 14px;border-radius:8px;margin-top:14px;font-size:14px}
+
+  footer{text-align:center;color:var(--muted);font-size:13px;padding:24px 16px}
+  footer .logo{width:48px;height:48px}
+
+  /* ---------- Pemutar suara ---------- */
+  #player{position:fixed;left:0;right:0;bottom:0;z-index:30;background:var(--navy);color:#fff;box-shadow:0 -6px 20px rgba(0,0,0,.2)}
+  #player .wrap{max-width:1080px;margin:0 auto;padding:10px 16px;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+  #player button{background:rgba(255,255,255,.12);color:#fff;border:0;border-radius:999px;width:40px;height:40px;font-size:16px;cursor:pointer}
+  #player button.main{background:var(--gold);color:var(--navy);width:46px;height:46px;font-size:18px}
+  #player button:hover{filter:brightness(1.1)}
+  #nowPlaying{flex:1;min-width:160px;font-size:13px}
+  #nowPlaying b{display:block;font-size:14px}
+  #caption{opacity:.8;display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .bar{height:4px;background:rgba(255,255,255,.2);border-radius:2px;margin-top:6px;overflow:hidden}
+  .bar i{display:block;height:100%;width:0;background:var(--gold);transition:width .3s}
+  #player select{background:rgba(255,255,255,.12);color:#fff;border:0;border-radius:8px;padding:6px;font-size:13px;max-width:160px}
+  #player select option{color:#000}
+  #voiceWarn{display:none;font-size:12px;color:var(--gold);width:100%}
+
+  @media (max-width:600px){
+    section.block{padding:16px}
+    #voiceSel{display:none}
+    .btn-ghost{margin:10px 0 0}
+  }
+  @media print{#player,#splash,nav.toc,.listen{display:none!important}body{padding:0}}
+</style>
+</head>
+<body>
+
+<!-- ============ LOGO (dipakai ulang) ============ -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <linearGradient id="gBlue" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#2a8de0"/><stop offset="1" stop-color="#0b2f66"/>
+    </linearGradient>
+    <symbol id="ndcLogo" viewBox="0 0 200 200">
+      <circle cx="100" cy="100" r="96" fill="url(#gBlue)"/>
+      <circle cx="100" cy="100" r="88" fill="none" stroke="#ffffff" stroke-opacity=".35" stroke-width="2"/>
+      <!-- globe -->
+      <g fill="none" stroke="#ffffff" stroke-opacity=".22" stroke-width="2">
+        <circle cx="100" cy="92" r="58"/>
+        <ellipse cx="100" cy="92" rx="28" ry="58"/>
+        <line x1="42" y1="92" x2="158" y2="92"/>
+        <path d="M50 64 Q100 76 150 64"/><path d="M50 120 Q100 108 150 120"/>
+      </g>
+      <text x="100" y="108" text-anchor="middle" font-family="Arial Black,Arial,sans-serif" font-weight="900" font-size="54" fill="#ffffff" letter-spacing="1">NDC</text>
+      <rect x="62" y="118" width="76" height="4" rx="2" fill="#f2b134"/>
+      <text x="100" y="142" text-anchor="middle" font-family="Arial,sans-serif" font-weight="700" font-size="15" fill="#ffffff" letter-spacing="3">LEARNING</text>
+    </symbol>
+  </defs>
+</svg>
+
+<!-- ============ PEMBUKA ============ -->
+<div id="splash" role="dialog" aria-label="Pembuka NDC Learning">
+  <div class="splash-inner">
+    <svg class="logo" aria-label="Logo NDC Learning"><use href="#ndcLogo"/></svg>
+    <p class="community">NDC Learning &amp; Professional Community</p>
+    <p class="tagline">LEARN • PRACTICE • GROW</p>
+    <p class="slogan">Bridging Knowledge, People, and Opportunities</p>
+    <h1>Kurikulum Soft Skill Tematik</h1>
+    <p class="sub">6 tema · 24 modul · 70% praktik · dilengkapi narasi suara</p>
+    <button class="btn btn-gold" id="startVoice">▶ Mulai dengan Suara</button>
+    <button class="btn btn-ghost" id="startSilent">Baca Tanpa Suara</button>
+    <p class="splash-note">Narasi memakai suara bawaan peramban. Gunakan Chrome atau Edge untuk suara Bahasa Indonesia terbaik.</p>
+  </div>
+</div>
+
+<header class="top">
+  <div class="top-inner">
+    <svg class="logo" aria-hidden="true"><use href="#ndcLogo"/></svg>
+    <div class="brand"><b>NDC Learning</b><span>Learn • Practice • Grow</span></div>
+  </div>
+</header>
+
+<div class="hero">
+  <div class="hero-inner">
+    <h1>Kurikulum Soft Skill Tematik</h1>
+    <p>Program soft skill NDC Learning yang disusun per tema. Peserta bebas memilih tema sesuai kebutuhan, dan setiap tema naik bertahap dari dasar sampai proyek nyata.</p>
+    <div class="stats">
+      <div class="stat"><b>6</b><span>Tema</span></div>
+      <div class="stat"><b>24</b><span>Modul</span></div>
+      <div class="stat"><b>3 jam</b><span>per modul</span></div>
+      <div class="stat"><b>70%</b><span>Praktik</span></div>
+    </div>
+  </div>
+</div>
+
+<nav class="toc" aria-label="Daftar isi"><div class="wrap" id="tocWrap"></div></nav>
+
+<main id="content"></main>
+
+<footer>
+  <svg class="logo" aria-hidden="true"><use href="#ndcLogo"/></svg>
+  <div><b>NDC Learning &amp; Professional Community</b></div>
+  <div>Bridging Knowledge, People, and Opportunities</div>
+</footer>
+
+<!-- ============ PEMUTAR SUARA ============ -->
+<div id="player" aria-label="Pemutar narasi">
+  <div class="wrap">
+    <button id="prevBtn" title="Bagian sebelumnya" aria-label="Bagian sebelumnya">⏮</button>
+    <button id="playBtn" class="main" title="Putar / jeda" aria-label="Putar atau jeda">▶</button>
+    <button id="nextBtn" title="Bagian berikutnya" aria-label="Bagian berikutnya">⏭</button>
+    <button id="stopBtn" title="Berhenti" aria-label="Berhenti">⏹</button>
+    <div id="nowPlaying">
+      <b id="npTitle">Narasi siap diputar</b>
+      <span id="caption">Tekan ▶ untuk mendengarkan penjelasan lengkap.</span>
+      <div class="bar"><i id="progress"></i></div>
+    </div>
+    <select id="rateSel" aria-label="Kecepatan suara">
+      <option value="0.85">0.85×</option>
+      <option value="1" selected>1×</option>
+      <option value="1.15">1.15×</option>
+      <option value="1.3">1.3×</option>
+    </select>
+    <select id="voiceSel" aria-label="Pilih suara"></select>
+    <div id="voiceWarn">Suara Bahasa Indonesia tidak ditemukan di perangkat ini; narasi memakai suara lain yang tersedia.</div>
+  </div>
+</div>
+
+<script>
+/* ==========================================================
+   DATA KURIKULUM
+   ========================================================== */
+const TEMA = [
+  {
+    id:"tema1", ic:"💬", kode:"KOM", judul:"Komunikasi Efektif",
+    desk:"Melatih peserta berbicara, mendengar, dan menulis dengan jelas dan percaya diri, di kampus maupun di tempat kerja.",
+    modul:[
+      ["KOM-1","Dasar Komunikasi & Mendengar Aktif","Model komunikasi, hambatan, mendengar aktif, bertanya terbuka","Permainan \"instruksi tanpa melihat\", latihan parafrase berpasangan","Lembar refleksi gaya komunikasi"],
+      ["KOM-2","Berbicara di Depan Umum","Struktur pembuka–isi–penutup, bahasa tubuh, mengatasi gugup","Presentasi 3 menit, direkam dan dinilai sesama peserta","Video presentasi + umpan balik"],
+      ["KOM-3","Komunikasi Tertulis Profesional","Email formal, laporan singkat, notulen, pesan WA kerja","Menulis ulang email dan laporan yang buruk menjadi ringkas","1 email + laporan 1 halaman"],
+      ["KOM-4","Proyek: Presentasi Teknis & Tanya Jawab","Menyusun slide sederhana, menjawab pertanyaan sulit, briefing kerja","Presentasi 7 menit di depan panel dengan sesi tanya jawab","Slide + rekaman presentasi untuk portofolio"]
+    ],
+    narasi:`Tema pertama adalah Komunikasi Efektif. Tema ini melatih peserta berbicara, mendengar, dan menulis dengan jelas dan percaya diri.
+Modul pertama, Dasar Komunikasi dan Mendengar Aktif. Peserta mengenal model komunikasi dan hambatannya, lalu berlatih mendengar aktif dan bertanya terbuka. Latihannya seru, misalnya permainan memberi instruksi tanpa melihat. Hasilnya, peserta membuat lembar refleksi tentang gaya komunikasinya sendiri.
+Modul kedua, Berbicara di Depan Umum. Peserta belajar menyusun pembuka, isi, dan penutup, memakai bahasa tubuh, dan mengatasi rasa gugup. Setiap peserta tampil tiga menit, direkam, lalu mendapat umpan balik dari teman-temannya.
+Modul ketiga, Komunikasi Tertulis Profesional. Fokusnya email formal, laporan singkat, notulen, dan pesan WhatsApp untuk urusan kerja. Peserta menulis ulang contoh email dan laporan yang buruk menjadi ringkas dan jelas.
+Modul keempat adalah proyek: Presentasi Teknis dan Tanya Jawab. Peserta menyiapkan slide sederhana, lalu presentasi tujuh menit di depan panel, termasuk menjawab pertanyaan sulit. Rekamannya bisa langsung masuk portofolio.`
+  },
+  {
+    id:"tema2", ic:"🤝", kode:"TIM", judul:"Kepemimpinan dan Kerja Sama Tim",
+    desk:"Membangun tanggung jawab, kemampuan bekerja dalam tim, mengambil keputusan, dan menyelesaikan konflik.",
+    modul:[
+      ["TIM-1","Dasar Kerja Tim","Tahap pembentukan tim, peran dalam tim, kepercayaan","Tantangan tim (menara kertas, teka-teki kelompok)","Kontrak tim"],
+      ["TIM-2","Mengelola Konflik & Memberi Umpan Balik","Gaya menyelesaikan konflik, umpan balik model SBI","Permainan peran konflik antaranggota","Rencana penyelesaian 1 kasus konflik"],
+      ["TIM-3","Memimpin Rapat & Mendelegasikan","Gaya kepemimpinan, delegasi, memimpin rapat efektif, mengambil keputusan bersama","Simulasi rapat dengan agenda, notulen, dan keputusan","Agenda + notulen rapat"],
+      ["TIM-4","Proyek: Memimpin Tim Kecil","Perencanaan tim, pembagian tugas, evaluasi kinerja tim","Memimpin tim 4–5 orang menyelesaikan tugas 3 jam","Laporan proyek tim + refleksi kepemimpinan"]
+    ],
+    narasi:`Tema kedua adalah Kepemimpinan dan Kerja Sama Tim. Di sini peserta belajar bertanggung jawab, bekerja bersama, mengambil keputusan, dan menyelesaikan konflik.
+Modul pertama, Dasar Kerja Tim. Peserta memahami tahap pembentukan tim, peran setiap anggota, dan pentingnya rasa saling percaya. Mereka langsung mencoba tantangan tim, seperti membangun menara kertas, lalu menyusun kontrak tim.
+Modul kedua, Mengelola Konflik dan Memberi Umpan Balik. Peserta mengenal berbagai gaya menyelesaikan konflik dan cara memberi umpan balik dengan model S B I, yaitu situasi, perilaku, dan dampak. Latihannya berupa permainan peran konflik antaranggota tim.
+Modul ketiga, Memimpin Rapat dan Mendelegasikan. Peserta belajar gaya kepemimpinan, cara membagi tugas, dan memimpin rapat yang efektif sampai menghasilkan keputusan. Output-nya agenda dan notulen rapat.
+Modul keempat adalah proyek: Memimpin Tim Kecil. Setiap peserta mendapat giliran memimpin tim empat sampai lima orang untuk menyelesaikan tugas selama tiga jam, lalu menulis laporan dan refleksi kepemimpinannya.`
+  },
+  {
+    id:"tema3", ic:"⏱️", kode:"WKT", judul:"Manajemen Waktu dan Produktivitas",
+    desk:"Membantu peserta mengatur waktu, menentukan prioritas, membangun disiplin, dan menyelesaikan pekerjaan tepat waktu.",
+    modul:[
+      ["WKT-1","Mengenali Pola Waktu & Menetapkan Tujuan","Audit waktu 1 minggu, SMART goals, kebiasaan yang menghambat","Mencatat dan menganalisis pemakaian waktu sendiri","Hasil audit waktu + 3 tujuan SMART"],
+      ["WKT-2","Prioritas & Perencanaan Mingguan","Matriks Eisenhower, time blocking, daftar tugas harian","Menyusun jadwal mingguan kuliah/kerja, organisasi, istirahat","Jadwal 2 minggu"],
+      ["WKT-3","Fokus, Prokrastinasi & Energi","Teknik Pomodoro, mengurangi gangguan gawai, menjaga energi dan istirahat","Tantangan fokus 7 hari dengan catatan harian","Jurnal fokus 7 hari"],
+      ["WKT-4","Proyek: Mengelola Banyak Tugas Sekaligus","Rincian pekerjaan, tenggat, jadwal Gantt sederhana, evaluasi","Merencanakan dan menjalankan 1 proyek kecil 2 minggu","Rencana proyek + laporan evaluasi"]
+    ],
+    narasi:`Tema ketiga adalah Manajemen Waktu dan Produktivitas. Tema ini membantu peserta mengatur waktu, menentukan prioritas, dan menyelesaikan pekerjaan tepat waktu.
+Modul pertama, Mengenali Pola Waktu dan Menetapkan Tujuan. Peserta mencatat pemakaian waktunya selama satu minggu, menemukan kebiasaan yang menghambat, lalu menyusun tiga tujuan dengan format SMART.
+Modul kedua, Prioritas dan Perencanaan Mingguan. Peserta memakai matriks Eisenhower untuk memilah tugas penting dan mendesak, serta teknik time blocking untuk menyusun jadwal dua minggu yang seimbang antara kuliah atau kerja, organisasi, dan istirahat.
+Modul ketiga, Fokus, Prokrastinasi, dan Energi. Peserta mencoba teknik Pomodoro, mengurangi gangguan dari gawai, dan belajar menjaga energi. Ada tantangan fokus tujuh hari dengan jurnal harian.
+Modul keempat adalah proyek: Mengelola Banyak Tugas Sekaligus. Peserta merinci pekerjaan, menetapkan tenggat, membuat jadwal Gantt sederhana, lalu menjalankan satu proyek kecil selama dua minggu dan mengevaluasinya.`
+  },
+  {
+    id:"tema4", ic:"🧠", kode:"BKR", judul:"Berpikir Kritis dan Pemecahan Masalah",
+    desk:"Melatih peserta menganalisis informasi, menemukan akar masalah, dan mengambil keputusan berdasarkan data.",
+    modul:[
+      ["BKR-1","Dasar Berpikir Kritis","Membedakan fakta dan opini, bias berpikir, mengecek sumber informasi","Menilai berita, unggahan media sosial, dan klaim iklan","Lembar analisis 3 informasi"],
+      ["BKR-2","Menemukan Akar Masalah","5 Why, diagram fishbone, mendefinisikan masalah dengan tepat","Menganalisis kasus praktikum atau pekerjaan yang gagal","Analisis fishbone 1 kasus"],
+      ["BKR-3","Mengambil Keputusan Berbasis Data","Membaca grafik dan tabel, matriks keputusan, menilai risiko","Studi kasus memilih solusi dari beberapa alternatif","Matriks keputusan + alasan pilihan"],
+      ["BKR-4","Proyek: Menyelesaikan Masalah Nyata","Siklus PDCA, menyusun usulan perbaikan, mempresentasikan solusi","Tim memecahkan 1 masalah nyata di kampus atau komunitas","Laporan usulan perbaikan (format A3)"]
+    ],
+    narasi:`Tema keempat adalah Berpikir Kritis dan Pemecahan Masalah. Peserta dilatih menganalisis informasi, menemukan akar masalah, dan mengambil keputusan berdasarkan data.
+Modul pertama, Dasar Berpikir Kritis. Peserta belajar membedakan fakta dan opini, mengenali bias berpikir, dan mengecek sumber informasi. Bahannya dekat dengan keseharian, seperti berita, unggahan media sosial, dan klaim iklan.
+Modul kedua, Menemukan Akar Masalah. Peserta memakai teknik lima kali bertanya mengapa dan diagram tulang ikan atau fishbone, untuk menganalisis kasus praktikum atau pekerjaan yang gagal.
+Modul ketiga, Mengambil Keputusan Berbasis Data. Peserta belajar membaca grafik dan tabel, menilai risiko, dan memakai matriks keputusan untuk memilih solusi terbaik dari beberapa alternatif.
+Modul keempat adalah proyek: Menyelesaikan Masalah Nyata. Dalam tim, peserta memakai siklus P D C A, yaitu Plan, Do, Check, Act, untuk memecahkan satu masalah nyata di kampus atau komunitas, lalu menuliskannya dalam laporan satu lembar format A3.`
+  },
+  {
+    id:"tema5", ic:"🎯", kode:"KAR", judul:"Persiapan Karier dan Profesionalisme",
+    desk:"Menyiapkan peserta memasuki dunia kerja: mengenal jalur karier, lolos seleksi, dan bersikap profesional.",
+    modul:[
+      ["KAR-1","Mengenal Diri & Peta Karier","Minat, kekuatan, nilai pribadi, peta karier sesuai jurusan","Inventori kekuatan, wawancara singkat dengan praktisi","Profil diri + peta karier 1 halaman"],
+      ["KAR-2","CV, Portofolio & LinkedIn","CV ramah sistem rekrutmen (ATS), menulis pencapaian, profil LinkedIn","Klinik CV: saling menilai CV dengan rubrik","CV final + profil LinkedIn"],
+      ["KAR-3","Wawancara & Assessment","Metode STAR, psikotes, diskusi kelompok (LGD)","Mock interview dan simulasi LGD dengan pengamat","Bank jawaban STAR (5 cerita) + lembar umpan balik"],
+      ["KAR-4","Proyek: Etika Profesional & Rencana 90 Hari","Integritas, budaya keselamatan, etika di tempat kerja, adaptasi pekerja baru","Studi kasus dilema etika, menyusun rencana kerja awal","Rencana 90 hari pertama"]
+    ],
+    narasi:`Tema kelima adalah Persiapan Karier dan Profesionalisme. Tema ini menyiapkan peserta memasuki dunia kerja, dari mengenal jalur karier sampai bersikap profesional.
+Modul pertama, Mengenal Diri dan Peta Karier. Peserta menggali minat, kekuatan, dan nilai pribadinya, lalu berbincang singkat dengan praktisi untuk menyusun peta karier satu halaman.
+Modul kedua, C V, Portofolio, dan LinkedIn. Peserta belajar menulis C V yang mudah dibaca sistem rekrutmen, menuliskan pencapaian, dan merapikan profil LinkedIn. Ada klinik C V, di mana peserta saling menilai memakai rubrik.
+Modul ketiga, Wawancara dan Assessment. Peserta berlatih menjawab dengan metode STAR, yaitu Situasi, Tugas, Aksi, dan Hasil. Mereka juga mengenal psikotes dan mengikuti simulasi diskusi kelompok dengan pengamat.
+Modul keempat adalah proyek: Etika Profesional dan Rencana Sembilan Puluh Hari. Peserta membahas integritas, budaya keselamatan, dan etika di tempat kerja, lalu menyusun rencana kerja untuk sembilan puluh hari pertama sebagai karyawan baru.`
+  },
+  {
+    id:"tema6", ic:"💡", kode:"KRE", judul:"Kreativitas dan Kemampuan Beradaptasi",
+    desk:"Mengembangkan cara berpikir kreatif dan kemampuan menyesuaikan diri dengan perubahan, teknologi baru, dan lingkungan kerja yang berbeda.",
+    modul:[
+      ["KRE-1","Dasar Berpikir Kreatif","Hambatan kreativitas, brainstorming, teknik SCAMPER, mind map","Menghasilkan 20 ide untuk 1 masalah sehari-hari","Peta ide + 3 ide terpilih"],
+      ["KRE-2","Growth Mindset & Belajar Hal Baru","Pola pikir bertumbuh, belajar dari kegagalan, belajar cepat dengan bantuan AI secara bertanggung jawab","Menguasai 1 keterampilan baru dalam 1 minggu dan melaporkannya","Jurnal belajar 1 minggu"],
+      ["KRE-3","Beradaptasi dengan Perubahan & Tekanan","Menghadapi perubahan rencana, mengelola stres, ketangguhan (resiliensi)","Simulasi situasi berubah mendadak (jadwal, tim, target)","Rencana menghadapi 2 skenario perubahan"],
+      ["KRE-4","Proyek: Design Thinking","Empati, definisi masalah, ide, prototipe, uji coba","Tim merancang solusi sederhana dan mengujinya ke calon pengguna","Prototipe + presentasi pitching 5 menit"]
+    ],
+    narasi:`Tema keenam adalah Kreativitas dan Kemampuan Beradaptasi. Tema ini mengembangkan cara berpikir kreatif dan kemampuan menyesuaikan diri dengan perubahan dan teknologi baru.
+Modul pertama, Dasar Berpikir Kreatif. Peserta mengenali hambatan kreativitas, lalu berlatih brainstorming, teknik SCAMPER, dan peta pikiran. Tantangannya, menghasilkan dua puluh ide untuk satu masalah sehari-hari.
+Modul kedua, Growth Mindset dan Belajar Hal Baru. Peserta membangun pola pikir bertumbuh, belajar dari kegagalan, dan belajar cepat dengan bantuan kecerdasan buatan secara bertanggung jawab. Selama satu minggu, peserta menguasai satu keterampilan baru dan mencatatnya di jurnal.
+Modul ketiga, Beradaptasi dengan Perubahan dan Tekanan. Peserta berlatih menghadapi perubahan mendadak, seperti jadwal, tim, atau target yang berubah, sambil belajar mengelola stres dan membangun ketangguhan.
+Modul keempat adalah proyek: Design Thinking. Dalam tim, peserta melewati tahap empati, definisi masalah, ide, prototipe, dan uji coba, lalu mempresentasikan solusinya dalam pitching lima menit.`
+  }
+];
+
+const LEVEL = [
+  ["Dasar","Memahami konsep dan mengenali kebiasaan diri","Refleksi diri, latihan sederhana"],
+  ["Terapan","Menerapkan alat atau teknik di situasi kampus","Latihan terstruktur dengan umpan balik"],
+  ["Lanjut","Menghadapi situasi sulit dan situasi kerja industri","Simulasi, permainan peran, studi kasus"],
+  ["Proyek","Membuktikan keterampilan lewat tugas nyata","Produk atau presentasi yang masuk portofolio"]
+];
+
+/* ==========================================================
+   NARASI BAGIAN UMUM
+   ========================================================== */
+const NARASI = {
+  pembuka:`Selamat datang di NDC Learning and Professional Community. Learn, Practice, Grow. Bridging Knowledge, People, and Opportunities.
+Halaman ini memperkenalkan Kurikulum Soft Skill Tematik NDC Learning. Program ini terdiri dari enam tema, dan setiap tema berisi empat modul, sehingga totalnya dua puluh empat modul.
+Anda bisa mendengarkan seluruh penjelasan dari awal sampai akhir, atau menekan tombol Dengarkan di setiap bagian untuk mendengar bagian tertentu saja. Mari kita mulai.`,
+  ringkasan:`Kita mulai dari ringkasan program.
+Kurikulum ini ditujukan untuk mahasiswa dari semua jurusan dan semester, lulusan baru, serta pekerja muda dengan pengalaman nol sampai tiga tahun.
+Strukturnya enam tema kali empat modul. Setiap modul berlangsung tiga jam dalam satu sesi. Jadi satu tema membutuhkan dua belas jam, yang bisa dijalankan dalam empat pertemuan mingguan atau dua hari pelatihan. Seluruh tema berjumlah tujuh puluh dua jam.
+Pendekatannya tiga puluh persen materi dan tujuh puluh persen praktik, melalui simulasi, permainan peran, studi kasus, dan proyek. Setiap tugas praktik dinilai dengan rubrik empat tingkat, dan peserta mendapat sertifikat per tema serta portofolio hasil praktik.
+Bedanya dengan kurikulum per semester Kampus sampai Siap Kerja: program tematik ini dijual per tema sebagai pelatihan singkat, sedangkan kurikulum per semester adalah jalur pendampingan panjang dari semester satu sampai lulus.`,
+  level:`Selanjutnya, level modul. Urutan empat modul selalu sama di setiap tema, sehingga peserta mudah melihat kemajuannya.
+Modul pertama adalah level Dasar. Fokusnya memahami konsep dan mengenali kebiasaan diri.
+Modul kedua adalah level Terapan. Peserta menerapkan alat atau teknik pada situasi kampus, dengan umpan balik dari fasilitator.
+Modul ketiga adalah level Lanjut. Peserta menghadapi situasi sulit dan situasi kerja di industri melalui simulasi dan studi kasus.
+Modul keempat adalah level Proyek. Peserta membuktikan keterampilannya lewat tugas nyata yang hasilnya masuk portofolio.
+Modul pertama bisa diikuti tanpa syarat. Modul dua sampai empat sebaiknya diikuti berurutan, tetapi peserta yang sudah berpengalaman boleh langsung masuk setelah tes penempatan singkat.`,
+  paket:`Sekarang, paket pelatihan dan penilaian. Karena setiap tema berdiri sendiri, program ini bisa ditawarkan dalam beberapa bentuk.
+Pertama, kelas satu modul, tiga jam, cocok untuk webinar, kuliah tamu, atau uji coba peserta baru.
+Kedua, kelas tema, berisi empat modul atau dua belas jam, cocok untuk pelatihan umum dan himpunan mahasiswa.
+Ketiga, paket tiga tema, misalnya Komunikasi, Kerja Tim, dan Karier, untuk persiapan magang atau kerja.
+Keempat, program lengkap dua puluh empat modul, untuk kerja sama dengan kampus atau organisasi.
+Penilaian memakai rubrik empat tingkat: Mulai, Berkembang, Cakap, dan Teladan. Modul dinyatakan selesai jika peserta hadir, mengumpulkan output, dan minimal mencapai tingkat Berkembang.
+Peserta yang menyelesaikan empat modul dalam satu tema mendapat sertifikat tema. Peserta yang menuntaskan keenam tema mendapat sertifikat NDC Soft Skill Professional.`,
+  hubungan:`Terakhir, hubungan dengan kurikulum per semester. Kedua program saling melengkapi dan memakai rubrik yang sama, sehingga hasil peserta bisa diakui di keduanya.
+Kurikulum per semester terdiri dari empat tahap dan dua puluh modul, diikuti berurutan dari semester satu sampai lulus, dan dilengkapi Soft Skill Passport serta Bootcamp.
+Kurikulum tematik terdiri dari enam tema dan dua puluh empat modul, bisa dipilih bebas, dan berbentuk pelatihan singkat per tema.
+Di website NDC Learning, kurikulum tematik tampil sebagai enam kartu di halaman Soft Skill Development.`,
+  penutup:`Itulah penjelasan lengkap Kurikulum Soft Skill Tematik NDC Learning. Pilih tema yang paling Anda butuhkan, dan mulailah berlatih.
+Terima kasih telah mendengarkan. Learn, Practice, Grow, bersama NDC Learning.`
+};
+
+/* ==========================================================
+   RENDER HALAMAN
+   ========================================================== */
+const esc = s => s.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
+const listenBtn = id => `<button class="listen" data-listen="${id}">🔊 Dengarkan</button>`;
+
+function secHead(id, eyebrow, title){
+  return `<div class="sec-head"><div><span class="eyebrow">${eyebrow}</span><h2>${title}</h2></div>${listenBtn(id)}</div>`;
+}
+
+let html = "";
+
+html += `<section class="block" id="pembuka" data-title="Pembuka">
+  ${secHead("pembuka","Selamat datang","Tentang Kurikulum Ini")}
+  <p class="lead">Program soft skill NDC Learning: 6 tema × 4 modul = 24 modul. Peserta bebas memilih tema sesuai kebutuhan, terpisah dari kurikulum per semester "Kampus sampai Siap Kerja".</p>
+  <div class="themes">${TEMA.map(t=>`<a class="theme-chip" href="#${t.id}"><span class="ic">${t.ic}</span>${t.judul}</a>`).join("")}</div>
+</section>`;
+
+html += `<section class="block" id="ringkasan" data-title="Ringkasan program">
+  ${secHead("ringkasan","Bagian 1","Ringkasan Program")}
+  <p class="lead">Setiap tema berdiri sendiri dan bisa diikuti tanpa urutan. Di dalam satu tema, keempat modul naik bertahap dari dasar sampai proyek nyata.</p>
+  <div class="table-wrap"><table>
+    <tr><th style="width:28%">Item</th><th>Keterangan</th></tr>
+    <tr><td>Sasaran</td><td>Mahasiswa semua jurusan dan semester, lulusan baru, pekerja muda (0–3 tahun)</td></tr>
+    <tr><td>Struktur</td><td>6 tema × 4 modul = 24 modul; tiap modul 3 jam (1 sesi)</td></tr>
+    <tr><td>Durasi per tema</td><td>12 jam: 4 sesi mingguan atau 2 hari pelatihan</td></tr>
+    <tr><td>Total waktu</td><td>72 jam untuk seluruh tema</td></tr>
+    <tr><td>Pendekatan</td><td>30% materi, 70% praktik: simulasi, permainan peran, studi kasus, proyek</td></tr>
+    <tr><td>Penilaian</td><td>Tugas praktik per modul dengan rubrik 4 tingkat (Mulai, Berkembang, Cakap, Teladan)</td></tr>
+    <tr><td>Keluaran</td><td>Sertifikat per tema dan portofolio hasil praktik</td></tr>
+  </table></div>
+  <div class="note">Program ini dijual per tema (pelatihan singkat), sedangkan "Kampus sampai Siap Kerja" adalah jalur pendampingan panjang dari semester 1 sampai lulus.</div>
+</section>`;
+
+html += `<section class="block" id="level" data-title="Level modul">
+  ${secHead("level","Bagian 2","Level Modul")}
+  <p class="lead">Urutan 4 modul sama di setiap tema, sehingga peserta mudah melihat kemajuannya.</p>
+  <div class="levels">${LEVEL.map((l,i)=>`<div class="level"><span class="n">${i+1}</span><b>${l[0]}</b><p>${l[1]}</p><p><i>Contoh hasil:</i> ${l[2]}</p></div>`).join("")}</div>
+  <div class="note">Modul 1 tanpa syarat. Modul 2–4 disarankan berurutan, tetapi peserta berpengalaman boleh langsung ikut setelah tes penempatan singkat.</div>
+</section>`;
+
+TEMA.forEach((t,ti)=>{
+  html += `<section class="block" id="${t.id}" data-title="Tema ${ti+1}: ${t.judul}">
+    ${secHead(t.id,`Tema ${ti+1} · ${t.kode}`,`${t.ic} ${t.judul}`)}
+    <p class="lead">${t.desk}</p>
+    <div class="modules">${t.modul.map((m,i)=>`
+      <div class="mod">
+        <span class="tag ${i===3?"l4":""}">Level ${LEVEL[i][0]}</span>
+        <h3><span class="kode">${m[0]}</span><br>${esc(m[1])}</h3>
+        <dl><dt>Topik inti</dt><dd>${esc(m[2])}</dd>
+            <dt>Praktik</dt><dd>${esc(m[3])}</dd>
+            <dt>Output</dt><dd>${esc(m[4])}</dd></dl>
+      </div>`).join("")}</div>
+  </section>`;
+});
+
+html += `<section class="block" id="paket" data-title="Paket pelatihan dan penilaian">
+  ${secHead("paket","Bagian 3","Paket Pelatihan dan Penilaian")}
+  <p class="lead">Karena tiap tema berdiri sendiri, program ini mudah ditawarkan dalam beberapa bentuk.</p>
+  <div class="table-wrap"><table>
+    <tr><th>Paket</th><th>Isi</th><th>Cocok untuk</th></tr>
+    <tr><td>Kelas 1 modul</td><td>1 sesi 3 jam</td><td>Webinar, kuliah tamu, uji coba peserta baru</td></tr>
+    <tr><td>Kelas tema</td><td>4 modul (12 jam), 4 pekan atau 2 hari</td><td>Pelatihan umum, himpunan mahasiswa</td></tr>
+    <tr><td>Paket 3 tema</td><td>12 modul pilihan, misalnya Komunikasi + Tim + Karier</td><td>Persiapan magang atau kerja</td></tr>
+    <tr><td>Program lengkap</td><td>24 modul</td><td>Kerja sama dengan kampus atau organisasi</td></tr>
+  </table></div>
+  <p>Penilaian memakai rubrik 4 tingkat: <b>Mulai</b>, <b>Berkembang</b>, <b>Cakap</b>, <b>Teladan</b>. Modul selesai jika peserta hadir, mengumpulkan output, dan minimal mencapai tingkat 2.</p>
+  <ul class="clean">
+    <li><b>Sertifikat tema:</b> menyelesaikan 4 modul satu tema.</li>
+    <li><b>Sertifikat NDC Soft Skill Professional:</b> menyelesaikan seluruh 6 tema.</li>
+  </ul>
+</section>`;
+
+html += `<section class="block" id="hubungan" data-title="Hubungan dengan kurikulum per semester">
+  ${secHead("hubungan","Bagian 4","Hubungan dengan Kurikulum per Semester")}
+  <p class="lead">Dua program ini saling melengkapi dan memakai rubrik yang sama, sehingga hasil peserta bisa diakui di keduanya.</p>
+  <div class="table-wrap"><table>
+    <tr><th>Aspek</th><th>Kurikulum per semester<br>(Kampus sampai Siap Kerja)</th><th>Kurikulum tematik<br>(halaman ini)</th></tr>
+    <tr><td>Struktur</td><td>4 tahap × 5 modul = 20 modul</td><td>6 tema × 4 modul = 24 modul</td></tr>
+    <tr><td>Cara mengikuti</td><td>Berurutan dari semester 1 sampai lulus</td><td>Bebas memilih tema</td></tr>
+    <tr><td>Sasaran</td><td>Mahasiswa yang didampingi jangka panjang</td><td>Mahasiswa, lulusan baru, pekerja muda</td></tr>
+    <tr><td>Bentuk</td><td>Pendampingan, Soft Skill Passport, Bootcamp</td><td>Pelatihan singkat per tema</td></tr>
+    <tr><td>Di website</td><td>Halaman "Kampus sampai Siap Kerja"</td><td>6 kartu di halaman Soft Skill Development</td></tr>
+  </table></div>
+</section>`;
+
+html += `<section class="block" id="penutup" data-title="Penutup">
+  ${secHead("penutup","Penutup","Siap Mulai Berlatih?")}
+  <p class="lead">Pilih tema yang paling Anda butuhkan dan mulai berlatih bersama NDC Learning. <b>Learn • Practice • Grow.</b></p>
+</section>`;
+
+document.getElementById("content").innerHTML = html;
+
+/* Daftar isi */
+const tocItems = [["pembuka","Pembuka"],["ringkasan","Ringkasan"],["level","Level"],
+  ...TEMA.map((t,i)=>[t.id,`${i+1}. ${t.judul.split(" ")[0]}`]),["paket","Paket"],["hubungan","Hubungan"],["penutup","Penutup"]];
+document.getElementById("tocWrap").innerHTML = tocItems.map(([id,l])=>`<a href="#${id}" data-toc="${id}">${l}</a>`).join("");
+
+/* ==========================================================
+   NARASI SUARA (Web Speech API)
+   ========================================================== */
+const ORDER = ["pembuka","ringkasan","level",...TEMA.map(t=>t.id),"paket","hubungan","penutup"];
+const TEXT = id => NARASI[id] || (TEMA.find(t=>t.id===id)||{}).narasi || "";
+const TITLE = id => document.getElementById(id)?.dataset.title || id;
+
+const synth = window.speechSynthesis;
+const $ = id => document.getElementById(id);
+let voices = [], chunks = [], chunkIdx = 0, secIdx = 0, playing = false, paused = false, singleMode = false, token = 0;
+
+function loadVoices(){
+  if(!synth) return;
+  voices = synth.getVoices();
+  const id = voices.filter(v=>/^id|ind/i.test(v.lang));
+  const list = id.length ? id : voices;
+  $("voiceWarn").style.display = (voices.length && !id.length) ? "block" : "none";
+  $("voiceSel").style.visibility = list.length ? "visible" : "hidden";
+  const prev = $("voiceSel").value;
+  $("voiceSel").innerHTML = list.map(v=>`<option value="${esc(v.name)}">${esc(v.name)}</option>`).join("");
+  if(prev && list.some(v=>v.name===prev)) $("voiceSel").value = prev;
+  else {
+    const best = id.find(v=>/google/i.test(v.name)) || id.find(v=>/online|natural/i.test(v.name)) || id[0];
+    if(best) $("voiceSel").value = best.name;
+  }
+}
+if(synth){ loadVoices(); synth.onvoiceschanged = loadVoices; }
+
+/* Pecah teks panjang menjadi potongan pendek agar tidak terpotong di Chrome */
+function splitText(t){
+  const sentences = t.replace(/\s+/g," ").match(/[^.!?]+[.!?]*/g) || [t];
+  const out = []; let buf = "";
+  sentences.forEach(s=>{
+    s = s.trim(); if(!s) return;
+    if((buf+" "+s).length > 180 && buf){ out.push(buf); buf = s; }
+    else buf = buf ? buf+" "+s : s;
+  });
+  if(buf) out.push(buf);
+  return out;
+}
+
+function highlight(id){
+  document.querySelectorAll("section.block").forEach(s=>s.classList.toggle("speaking", s.id===id));
+  document.querySelectorAll("[data-toc]").forEach(a=>a.classList.toggle("active", a.dataset.toc===id));
+  const el = $(id); if(el) el.scrollIntoView({behavior:"smooth",block:"start"});
+}
+
+function updateUI(){
+  $("playBtn").textContent = (playing && !paused) ? "⏸" : "▶";
+}
+
+function playSection(i){
+  if(!synth){ alert("Peramban ini belum mendukung narasi suara. Silakan gunakan Chrome atau Edge."); return; }
+  token++; synth.cancel();
+  secIdx = Math.max(0, Math.min(ORDER.length-1, i));
+  const id = ORDER[secIdx];
+  chunks = splitText(TEXT(id)); chunkIdx = 0;
+  playing = true; paused = false;
+  $("npTitle").textContent = TITLE(id);
+  highlight(id); updateUI();
+  speakNext(token);
+}
+
+function speakNext(myToken){
+  if(myToken !== token) return;
+  if(chunkIdx >= chunks.length){
+    if(!singleMode && secIdx < ORDER.length-1){ setTimeout(()=>{ if(myToken===token) playSection(secIdx+1); }, 500); }
+    else finish();
+    return;
+  }
+  const u = new SpeechSynthesisUtterance(chunks[chunkIdx]);
+  const v = voices.find(x=>x.name===$("voiceSel").value);
+  if(v){ u.voice = v; u.lang = v.lang; } else u.lang = "id-ID";
+  u.rate = parseFloat($("rateSel").value); u.pitch = 1;
+  $("caption").textContent = chunks[chunkIdx];
+  $("progress").style.width = Math.round(((secIdx + chunkIdx/chunks.length)/ORDER.length)*100) + "%";
+  u.onend = ()=>{ if(myToken!==token) return; chunkIdx++; speakNext(myToken); };
+  u.onerror = e=>{ if(myToken!==token || e.error==="interrupted" || e.error==="canceled") return; chunkIdx++; speakNext(myToken); };
+  synth.speak(u);
+}
+
+function finish(){
+  playing = false; paused = false; updateUI();
+  $("caption").textContent = "Narasi selesai. Tekan ▶ untuk mengulang.";
+  if(!singleMode) $("progress").style.width = "100%";
+  document.querySelectorAll("section.block").forEach(s=>s.classList.remove("speaking"));
+}
+
+function stopAll(){
+  token++; if(synth) synth.cancel();
+  playing = false; paused = false; updateUI();
+  $("caption").textContent = "Narasi dihentikan.";
+  document.querySelectorAll("section.block").forEach(s=>s.classList.remove("speaking"));
+}
+
+$("playBtn").onclick = ()=>{
+  if(!playing){ singleMode = false; playSection(secIdx >= ORDER.length-1 && !paused ? 0 : secIdx); return; }
+  if(paused){ synth.resume(); paused = false; }
+  else { synth.pause(); paused = true; }
+  updateUI();
+};
+$("stopBtn").onclick = stopAll;
+$("nextBtn").onclick = ()=>{ singleMode = false; playSection(secIdx+1); };
+$("prevBtn").onclick = ()=>{ singleMode = false; playSection(secIdx-1); };
+$("rateSel").onchange = $("voiceSel").onchange = ()=>{ if(playing && !paused){ const s=singleMode; playSection(secIdx); singleMode=s; } };
+
+document.addEventListener("click", e=>{
+  const b = e.target.closest("[data-listen]"); if(!b) return;
+  singleMode = true; playSection(ORDER.indexOf(b.dataset.listen));
+});
+
+/* Chrome kadang menghentikan suara panjang: jaga tetap hidup */
+setInterval(()=>{ if(synth && playing && !paused && synth.speaking){ synth.pause(); synth.resume(); } }, 10000);
+
+/* Pembuka */
+function closeSplash(){ $("splash").classList.add("hide"); setTimeout(()=>$("splash").remove(), 700); }
+$("startVoice").onclick = ()=>{ closeSplash(); singleMode = false; playSection(0); };
+$("startSilent").onclick = closeSplash;
+
+/* Tandai menu aktif saat menggulir */
+const obs = new IntersectionObserver(ents=>{
+  if(playing) return;
+  ents.forEach(en=>{ if(en.isIntersecting) document.querySelectorAll("[data-toc]").forEach(a=>a.classList.toggle("active", a.dataset.toc===en.target.id)); });
+},{rootMargin:"-40% 0px -55% 0px"});
+document.querySelectorAll("section.block").forEach(s=>obs.observe(s));
+</script>
+</body>
+</html>
