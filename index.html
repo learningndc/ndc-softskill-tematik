@@ -1,579 +1,390 @@
-<!DOCTYPE html>
-<html lang="id">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Kurikulum Soft Skill Tematik | NDC Learning</title>
-<meta name="description" content="Kurikulum Soft Skill Tematik NDC Learning: 6 tema × 4 modul, dilengkapi narasi suara.">
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Soft Skill Tematik NDC</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap">
 <style>
-  :root{
-    --navy:#0b2545; --blue:#13579b; --sky:#1f8fe0; --gold:#f2b134;
-    --bg:#f4f7fb; --card:#ffffff; --text:#1c2733; --muted:#5b6b7c; --line:#dfe6ee;
-    --hl:#fff6dd;
-  }
-  *{box-sizing:border-box}
-  html{scroll-behavior:smooth}
-  body{margin:0;font-family:"Segoe UI",Roboto,Arial,sans-serif;background:var(--bg);color:var(--text);line-height:1.6;padding-bottom:96px}
-  a{color:var(--blue)}
+/* Layout: ruang kontrol — daftar topik di kiri, jalur modul di kanan, bar subtitle narasi di bawah */
+:root{
+  --bg:#eef2f6; --panel:#ffffff; --ink:#0f2236; --muted:#55687c; --line:#d3dbe4;
+  --navy:#0d2b4e; --steel:#2f6690; --amber:#f2a516; --amber-ink:#7a4b00;
+  --l0:#2f8f6b; --l1:#2f6690; --l2:#7a4fb0; --l3:#b2541b;
+  --cap-bg:#0d2b4e; --cap-fg:#f4f7fb;
+  --f-display:"Barlow Condensed","Arial Narrow",Arial,sans-serif;
+  --f-body:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --f-mono:"IBM Plex Mono",ui-monospace,Consolas,monospace;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#0a1624; --panel:#11233a; --ink:#e6edf5; --muted:#9fb1c4; --line:#22384f;
+  --navy:#081a2e; --steel:#6aa5d6; --amber:#f5b53a; --amber-ink:#f5b53a;
+  --l0:#53c39a; --l1:#6aa5d6; --l2:#b293e0; --l3:#ea8a4f; --cap-bg:#050f1b; --cap-fg:#eef3f8; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0a1624; --panel:#11233a; --ink:#e6edf5; --muted:#9fb1c4; --line:#22384f;
+  --navy:#081a2e; --steel:#6aa5d6; --amber:#f5b53a; --amber-ink:#f5b53a;
+  --l0:#53c39a; --l1:#6aa5d6; --l2:#b293e0; --l3:#ea8a4f; --cap-bg:#050f1b; --cap-fg:#eef3f8; color-scheme:dark}
 
-  /* ---------- Pembuka (splash) ---------- */
-  #splash{position:fixed;inset:0;z-index:50;display:flex;align-items:center;justify-content:center;
-    background:radial-gradient(circle at 30% 20%,#1d6fc0 0%,var(--navy) 65%);color:#fff;text-align:center;padding:24px;transition:opacity .6s}
-  #splash.hide{opacity:0;pointer-events:none}
-  .splash-inner{max-width:560px;animation:rise .9s ease-out}
-  .splash-inner .logo{width:150px;height:150px;margin:0 auto 18px;filter:drop-shadow(0 8px 24px rgba(0,0,0,.35));animation:spin-in 1.2s ease-out}
-  .splash-inner h1{font-size:clamp(24px,5vw,36px);margin:6px 0 4px}
-  .splash-inner .community{letter-spacing:.5px;opacity:.9;margin:0}
-  .splash-inner .tagline{color:var(--gold);font-weight:600;letter-spacing:2px;margin:10px 0 4px}
-  .splash-inner .slogan{font-style:italic;opacity:.85;margin:0 0 26px}
-  .splash-inner .sub{opacity:.9;margin:0 0 22px}
-  .btn{border:0;border-radius:999px;padding:12px 22px;font-size:15px;font-weight:600;cursor:pointer;transition:transform .15s,background .15s}
-  .btn:hover{transform:translateY(-1px)}
-  .btn-gold{background:var(--gold);color:var(--navy)}
-  .btn-ghost{background:transparent;color:#fff;border:1.5px solid rgba(255,255,255,.6);margin-left:8px}
-  .splash-note{font-size:12px;opacity:.7;margin-top:18px}
-  @keyframes rise{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:none}}
-  @keyframes spin-in{from{opacity:0;transform:rotate(-90deg) scale(.6)}to{opacity:1;transform:none}}
+html,body{height:100%}
+body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:15px;line-height:1.55}
+button{font:inherit;cursor:pointer}
+button:focus-visible{outline:3px solid var(--amber);outline-offset:2px}
 
-  /* ---------- Header ---------- */
-  header.top{background:var(--navy);color:#fff}
-  .top-inner{max-width:1080px;margin:0 auto;padding:14px 16px;display:flex;align-items:center;gap:12px}
-  .top-inner .logo{width:44px;height:44px;flex:none}
-  .brand b{display:block;font-size:17px}
-  .brand span{font-size:12px;opacity:.8}
-  .hero{background:linear-gradient(135deg,var(--blue),var(--navy));color:#fff}
-  .hero-inner{max-width:1080px;margin:0 auto;padding:36px 16px 40px}
-  .hero h1{margin:0 0 8px;font-size:clamp(24px,4.5vw,36px)}
-  .hero p{margin:0;max-width:720px;opacity:.92}
-  .stats{display:flex;flex-wrap:wrap;gap:12px;margin-top:22px}
-  .stat{background:rgba(255,255,255,.12);border-radius:12px;padding:10px 16px;min-width:120px}
-  .stat b{display:block;font-size:22px;color:var(--gold)}
-  .stat span{font-size:13px;opacity:.9}
+/* ---------- Opening ---------- */
+#intro{position:fixed;inset:0;z-index:50;background:#0d2b4e;color:#f4f7fb;display:grid;justify-items:center;align-items:start;overflow-y:auto;
+  padding:env(safe-area-inset-top,0px) max(16px,env(safe-area-inset-right,0px)) env(safe-area-inset-bottom,0px) max(16px,env(safe-area-inset-left,0px));
+  background-image:linear-gradient(rgba(255,255,255,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.05) 1px,transparent 1px);
+  background-size:32px 32px;transition:opacity .7s ease}
+#intro.gone{opacity:0;pointer-events:none}
+.intro-inner{display:grid;justify-items:center;gap:18px;text-align:center;max-width:760px;padding-block:40px 110px}
+.logo-wrap{width:220px;height:220px;display:grid;place-items:center;border-radius:50%;overflow:hidden;background:#fff;box-shadow:0 20px 60px rgba(0,0,0,.35)}
+.logo-wrap img{width:100%;height:100%;object-fit:cover}
+#intro .logo-wrap{animation:logoIn 1.4s cubic-bezier(.2,.9,.2,1.2) both}
+@keyframes logoIn{0%{transform:scale(.3) rotate(-8deg);opacity:0}60%{transform:scale(1.08);opacity:1}100%{transform:scale(1)}}
+.intro-eyebrow{font-family:var(--f-mono);font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:#f5b53a}
+.intro-title{font-family:var(--f-display);font-weight:700;font-size:clamp(34px,7vw,56px);line-height:1.02;text-wrap:balance;margin:0}
+.intro-tag{font-family:var(--f-display);font-weight:600;font-size:clamp(18px,3vw,22px);color:#f5b53a;margin:0;text-wrap:balance}
+.intro-tag-id{margin:-12px 0 0;color:#c6d4e3;font-style:italic;max-width:56ch}
+.intro-desc{display:grid;gap:10px;text-align:left;max-width:62ch;color:#dbe5ef;margin:0}
+.intro-desc p{margin:0}
+.areas{width:100%;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;text-align:left}
+@media (max-width:560px){.areas{grid-template-columns:1fr}}
+.areas h2{grid-column:1/-1;margin:6px 0 0;font-family:var(--f-mono);font-size:12px;font-weight:500;letter-spacing:.18em;text-transform:uppercase;color:#93a9c0;text-align:center}
+.area{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.14);border-radius:12px;padding:12px 14px;display:flex;gap:12px;align-items:center}
+.area .c{font-family:var(--f-mono);font-size:12px;background:#f2a516;color:#1b1200;border-radius:6px;padding:4px 7px;flex:none}
+.area b{font-family:var(--f-display);font-size:18px;font-weight:600;line-height:1.15;display:block}
+.area span{font-size:12px;color:#b9cadb}
+.total{font-family:var(--f-mono);font-size:13px;letter-spacing:.06em;color:#f4f7fb;border-top:1px solid rgba(255,255,255,.16);border-bottom:1px solid rgba(255,255,255,.16);padding:8px 14px}
+.motto{display:grid;gap:2px}
+.motto b{font-family:var(--f-display);font-size:clamp(20px,3.4vw,26px);letter-spacing:.02em}
+.motto span{color:#c6d4e3;font-size:14px}
+.intro-actions{display:flex;gap:10px;flex-wrap:wrap;justify-content:center}
+.btn-start{background:#f2a516;color:#1b1200;border:0;border-radius:999px;padding:14px 28px;font-weight:600;font-size:16px}
+.btn-start:hover{background:#ffb72e}
+.btn-listen{background:transparent;color:#f4f7fb;border:1px solid rgba(255,255,255,.35);border-radius:999px;padding:13px 22px;font-weight:600}
+.btn-listen:hover{background:rgba(255,255,255,.1)}
+.btn-listen[aria-pressed="true"]{border-color:#f2a516;color:#f5b53a}
+.intro-note{font-size:12px;color:#93a9c0}
+#intro .intro-eyebrow,#intro .intro-title,#intro .intro-tag{animation:rise .8s .5s both}
+#intro .intro-desc,#intro .areas,#intro .total,#intro .motto{animation:rise .8s .3s both}
+@keyframes rise{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
 
-  nav.toc{position:sticky;top:0;z-index:20;background:#fff;border-bottom:1px solid var(--line);overflow-x:auto;white-space:nowrap}
-  nav.toc .wrap{max-width:1080px;margin:0 auto;padding:8px 16px;display:flex;gap:6px}
-  nav.toc a{display:inline-block;padding:6px 12px;border-radius:999px;text-decoration:none;color:var(--muted);font-size:13px;font-weight:600}
-  nav.toc a:hover,nav.toc a.active{background:#e7f0fa;color:var(--blue)}
+/* ---------- App shell ---------- */
+.app{min-height:100%;display:flex;flex-direction:column}
+header.top{background:var(--navy);color:#f4f7fb;padding-block:10px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));
+  display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.top .mini-logo{width:42px;height:42px;border-radius:50%;background:#fff;overflow:hidden;flex:none}
+.top .mini-logo img{width:100%;height:100%;object-fit:cover}
+.brand{display:flex;flex-direction:column;line-height:1.15;min-width:0}
+.brand b{font-family:var(--f-display);font-size:21px;letter-spacing:.02em}
+.brand span{font-size:12px;color:#b9cadb}
+.controls{margin-left:auto;display:flex;gap:8px;flex-wrap:wrap}
+.ctl{background:rgba(255,255,255,.1);color:#f4f7fb;border:1px solid rgba(255,255,255,.2);border-radius:8px;padding:7px 12px;font-size:13px}
+.ctl:hover{background:rgba(255,255,255,.18)}
+.ctl[aria-pressed="true"]{background:#f2a516;color:#1b1200;border-color:#f2a516}
 
-  main{max-width:1080px;margin:0 auto;padding:8px 16px}
-  section.block{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:22px;margin:20px 0;scroll-margin-top:60px;transition:box-shadow .3s,background .3s}
-  section.block.speaking{background:var(--hl);box-shadow:0 0 0 3px var(--gold)}
-  .sec-head{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;flex-wrap:wrap}
-  .sec-head h2{margin:0;font-size:22px;color:var(--navy)}
-  .sec-head .eyebrow{display:block;font-size:12px;font-weight:700;letter-spacing:1px;color:var(--sky);text-transform:uppercase}
-  .listen{background:#e7f0fa;color:var(--blue);border:0;border-radius:999px;padding:8px 14px;font-weight:600;font-size:13px;cursor:pointer;white-space:nowrap}
-  .listen:hover{background:#d6e6f7}
-  .lead{color:var(--muted);margin:10px 0 16px}
+main{flex:1;display:grid;grid-template-columns:300px 1fr;gap:20px;padding-block:20px 120px;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));max-width:1280px;width:100%;margin:0 auto;box-sizing:border-box}
+@media (max-width:860px){main{grid-template-columns:1fr}}
 
-  .table-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:12px}
-  table{border-collapse:collapse;width:100%;font-size:14px;min-width:560px}
-  th,td{padding:10px 12px;text-align:left;vertical-align:top;border-bottom:1px solid var(--line)}
-  th{background:#eef3f9;color:var(--navy);font-size:13px}
-  tr:last-child td{border-bottom:0}
-  td.code{font-weight:700;color:var(--blue);white-space:nowrap}
+.topics{display:flex;flex-direction:column;gap:10px;min-width:0}
+.topics h2{font-family:var(--f-mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);margin:0 0 2px;font-weight:500}
+.topic-list{display:flex;flex-direction:column;gap:10px}
+@media (max-width:860px){.topic-list{display:grid;grid-template-columns:1fr 1fr;gap:8px}}
+@media (max-width:520px){.topic-list{grid-template-columns:1fr}}
+.topic{display:grid;grid-template-columns:auto 1fr;gap:4px 12px;text-align:left;background:var(--panel);color:var(--ink);border:1px solid var(--line);border-radius:12px;padding:14px;transition:border-color .2s,transform .2s}
+.topic:hover{border-color:var(--steel)}
+.topic .code{grid-row:span 2;font-family:var(--f-mono);font-size:13px;background:var(--bg);border:1px solid var(--line);border-radius:8px;padding:6px 8px;align-self:start;color:var(--steel)}
+.topic .name{font-family:var(--f-display);font-weight:600;font-size:19px;line-height:1.1}
+.topic .meta{font-size:12px;color:var(--muted)}
+.topic.active{border-color:var(--amber);box-shadow:inset 4px 0 0 var(--amber)}
+.topic.active .code{background:var(--amber);color:#1b1200;border-color:var(--amber)}
+.topic.speaking{transform:translateX(4px)}
 
-  .levels{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px}
-  .level{border-radius:12px;padding:14px;border:1px solid var(--line);background:#fafcff}
-  .level .n{display:inline-flex;width:30px;height:30px;border-radius:50%;align-items:center;justify-content:center;background:var(--blue);color:#fff;font-weight:700;margin-bottom:6px}
-  .level b{display:block;color:var(--navy)}
-  .level p{margin:4px 0 0;font-size:14px;color:var(--muted)}
+/* ---------- Topic stage ---------- */
+.stage{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:22px;min-width:0;display:flex;flex-direction:column;gap:18px}
+.stage-head{display:flex;gap:16px;align-items:flex-start;flex-wrap:wrap}
+.stage-head .t{flex:1;min-width:220px}
+.eyebrow{font-family:var(--f-mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--amber-ink)}
+.stage h1{font-family:var(--f-display);font-weight:700;font-size:clamp(28px,4vw,38px);line-height:1.05;margin:4px 0 6px;text-wrap:balance}
+.stage p.lead{margin:0;color:var(--muted);max-width:62ch}
+.btn-play{background:var(--steel);color:#fff;border:0;border-radius:10px;padding:10px 16px;font-weight:600}
+:root[data-theme="dark"] .btn-play{color:#06111d}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .btn-play{color:#06111d}}
+.btn-play:hover{filter:brightness(1.08)}
+.legend{display:flex;gap:16px;flex-wrap:wrap;font-size:12px;color:var(--muted)}
+.legend i{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:6px;vertical-align:-1px}
 
-  .themes{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:10px;margin-top:16px}
-  .theme-chip{display:flex;gap:10px;align-items:center;padding:12px;border-radius:12px;background:#f4f8fd;border:1px solid var(--line);text-decoration:none;color:var(--navy);font-weight:600;font-size:14px}
-  .theme-chip .ic{font-size:22px}
+.pipe-wrap{overflow-x:auto;padding-bottom:4px}
+.pipe{position:relative;display:grid;padding:26px 6px 4px}
+.pipe::before{content:"";position:absolute;left:30px;right:30px;top:47px;height:8px;border-radius:4px;background:var(--line)}
+.pipe .flow{position:absolute;left:30px;top:47px;height:8px;border-radius:4px;width:0;
+  background:repeating-linear-gradient(90deg,var(--amber) 0 14px,color-mix(in srgb,var(--amber) 55%,transparent) 14px 28px);
+  background-size:28px 8px;animation:flow 1s linear infinite;transition:width .6s ease}
+@keyframes flow{to{background-position:28px 0}}
+.zone{position:absolute;top:0;font-family:var(--f-mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase}
+.node{position:relative;z-index:1;display:grid;justify-items:center;align-content:start;gap:6px;background:none;border:0;color:var(--ink);padding:0 2px}
+.node .dot{width:50px;height:50px;border-radius:50%;background:var(--panel);border:3px solid var(--c);display:grid;place-items:center;font-family:var(--f-mono);font-size:13px;color:var(--c);transition:transform .25s,background .25s,color .25s}
+.node .lbl{font-size:11px;line-height:1.25;text-align:center;color:var(--muted);max-width:14ch}
+.node:hover .dot{transform:scale(1.08)}
+.node.done .dot{background:color-mix(in srgb,var(--c) 18%,var(--panel))}
+.node.on .dot{background:var(--c);color:#fff;transform:scale(1.15);box-shadow:0 0 0 6px color-mix(in srgb,var(--c) 22%,transparent)}
+.node.on .lbl{color:var(--ink);font-weight:600}
 
-  .modules{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px}
-  .mod{border:1px solid var(--line);border-radius:12px;padding:14px;background:#fff;position:relative}
-  .mod .tag{font-size:11px;font-weight:700;letter-spacing:.5px;padding:3px 8px;border-radius:999px;background:#e7f0fa;color:var(--blue)}
-  .mod .tag.l4{background:#fff1d1;color:#8a5a00}
-  .mod h3{margin:8px 0 6px;font-size:16px;color:var(--navy)}
-  .mod .kode{font-weight:700;color:var(--sky);font-size:13px}
-  .mod dl{margin:8px 0 0;font-size:13.5px}
-  .mod dt{font-weight:700;color:var(--muted);font-size:12px;margin-top:6px}
-  .mod dd{margin:0}
+.detail{display:grid;grid-template-columns:1fr 1fr;gap:18px;border-top:1px solid var(--line);padding-top:18px}
+@media (max-width:700px){.detail{grid-template-columns:1fr}}
+.detail > div{min-width:0}
+.detail .code-l{font-family:var(--f-mono);font-size:13px;color:var(--c)}
+.detail h3{font-family:var(--f-display);font-size:26px;line-height:1.1;margin:2px 0 8px;text-wrap:balance}
+.pill{display:inline-block;font-size:11px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;padding:3px 10px;border-radius:999px;color:var(--c);border:1px solid var(--c)}
+.detail p{margin:10px 0 0}
+.detail .dlabel{display:block;margin-top:12px;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-family:var(--f-mono)}
+.detail .dlabel + p{margin-top:2px}
+.box{background:var(--bg);border:1px solid var(--line);border-radius:12px;padding:14px 16px}
+.box h4{margin:0 0 6px;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-family:var(--f-mono);font-weight:500}
+.box h4 + ul, .box h4 + p{margin-top:0}
+.box * + h4{margin-top:12px}
+.box ul{margin:0;padding-left:18px}
+.box p{margin:0}
+.box li+li{margin-top:4px}
+.navrow{display:flex;gap:8px;margin-top:14px;flex-wrap:wrap}
+.btn-ghost{background:transparent;border:1px solid var(--line);color:var(--ink);border-radius:8px;padding:7px 12px;font-size:13px}
+.btn-ghost:hover{border-color:var(--steel)}
 
-  ul.clean{padding-left:20px;margin:10px 0 0}
-  .note{background:#f4f8fd;border-left:4px solid var(--sky);padding:10px 14px;border-radius:8px;margin-top:14px;font-size:14px}
-
-  footer{text-align:center;color:var(--muted);font-size:13px;padding:24px 16px}
-  footer .logo{width:48px;height:48px}
-
-  /* ---------- Pemutar suara ---------- */
-  #player{position:fixed;left:0;right:0;bottom:0;z-index:30;background:var(--navy);color:#fff;box-shadow:0 -6px 20px rgba(0,0,0,.2)}
-  #player .wrap{max-width:1080px;margin:0 auto;padding:10px 16px;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
-  #player button{background:rgba(255,255,255,.12);color:#fff;border:0;border-radius:999px;width:40px;height:40px;font-size:16px;cursor:pointer}
-  #player button.main{background:var(--gold);color:var(--navy);width:46px;height:46px;font-size:18px}
-  #player button:hover{filter:brightness(1.1)}
-  #nowPlaying{flex:1;min-width:160px;font-size:13px}
-  #nowPlaying b{display:block;font-size:14px}
-  #caption{opacity:.8;display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-  .bar{height:4px;background:rgba(255,255,255,.2);border-radius:2px;margin-top:6px;overflow:hidden}
-  .bar i{display:block;height:100%;width:0;background:var(--gold);transition:width .3s}
-  #player select{background:rgba(255,255,255,.12);color:#fff;border:0;border-radius:8px;padding:6px;font-size:13px;max-width:160px}
-  #player select option{color:#000}
-  #voiceWarn{display:none;font-size:12px;color:var(--gold);width:100%}
-
-  @media (max-width:600px){
-    section.block{padding:16px}
-    #voiceSel{display:none}
-    .btn-ghost{margin:10px 0 0}
-  }
-  @media print{#player,#splash,nav.toc,.listen{display:none!important}body{padding:0}}
+.caption{position:fixed;left:0;right:0;bottom:0;z-index:60;background:var(--cap-bg);color:var(--cap-fg);
+  padding:12px max(16px,env(safe-area-inset-right,0px)) calc(12px + env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px));
+  display:flex;gap:14px;align-items:center;box-shadow:0 -8px 24px rgba(0,0,0,.18)}
+.wave{display:flex;gap:3px;align-items:flex-end;height:22px;flex:none}
+.wave span{width:4px;height:6px;background:#f2a516;border-radius:2px}
+.caption.talk .wave span{animation:wv .9s ease-in-out infinite}
+.wave span:nth-child(2){animation-delay:.15s}.wave span:nth-child(3){animation-delay:.3s}.wave span:nth-child(4){animation-delay:.45s}
+@keyframes wv{0%,100%{height:6px}50%{height:22px}}
+#capText{margin:0;font-size:15px;line-height:1.45;min-width:0;max-width:110ch}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
-</head>
-<body>
 
-<!-- ============ LOGO (dipakai ulang) ============ -->
-<svg width="0" height="0" style="position:absolute" aria-hidden="true">
-  <defs>
-    <linearGradient id="gBlue" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0" stop-color="#2a8de0"/><stop offset="1" stop-color="#0b2f66"/>
-    </linearGradient>
-    <symbol id="ndcLogo" viewBox="0 0 200 200">
-      <circle cx="100" cy="100" r="96" fill="url(#gBlue)"/>
-      <circle cx="100" cy="100" r="88" fill="none" stroke="#ffffff" stroke-opacity=".35" stroke-width="2"/>
-      <!-- globe -->
-      <g fill="none" stroke="#ffffff" stroke-opacity=".22" stroke-width="2">
-        <circle cx="100" cy="92" r="58"/>
-        <ellipse cx="100" cy="92" rx="28" ry="58"/>
-        <line x1="42" y1="92" x2="158" y2="92"/>
-        <path d="M50 64 Q100 76 150 64"/><path d="M50 120 Q100 108 150 120"/>
-      </g>
-      <text x="100" y="108" text-anchor="middle" font-family="Arial Black,Arial,sans-serif" font-weight="900" font-size="54" fill="#ffffff" letter-spacing="1">NDC</text>
-      <rect x="62" y="118" width="76" height="4" rx="2" fill="#f2b134"/>
-      <text x="100" y="142" text-anchor="middle" font-family="Arial,sans-serif" font-weight="700" font-size="15" fill="#ffffff" letter-spacing="3">LEARNING</text>
-    </symbol>
-  </defs>
-</svg>
+<div id="intro"><div class="intro-inner" id="introInner"></div></div>
 
-<!-- ============ PEMBUKA ============ -->
-<div id="splash" role="dialog" aria-label="Pembuka NDC Learning">
-  <div class="splash-inner">
-    <svg class="logo" aria-label="Logo NDC Learning"><use href="#ndcLogo"/></svg>
-    <p class="community">NDC Learning &amp; Professional Community</p>
-    <p class="tagline">LEARN • PRACTICE • GROW</p>
-    <p class="slogan">Bridging Knowledge, People, and Opportunities</p>
-    <h1>Kurikulum Soft Skill Tematik</h1>
-    <p class="sub">6 tema · 24 modul · 70% praktik · dilengkapi narasi suara</p>
-    <button class="btn btn-gold" id="startVoice">▶ Mulai dengan Suara</button>
-    <button class="btn btn-ghost" id="startSilent">Baca Tanpa Suara</button>
-    <p class="splash-note">Narasi memakai suara bawaan peramban. Gunakan Chrome atau Edge untuk suara Bahasa Indonesia terbaik.</p>
-  </div>
+<div class="app">
+  <header class="top">
+    <div class="mini-logo" id="miniLogo"></div>
+    <div class="brand"><b>NDC Learning</b><span id="brandSub"></span></div>
+    <div class="controls">
+      <button class="ctl" id="btnOverview">⟲ Halaman pembukaan</button>
+      <button class="ctl" id="btnMute" aria-pressed="false">🔊 Suara aktif</button>
+      <button class="ctl" id="btnStop">■ Hentikan</button>
+    </div>
+  </header>
+  <main>
+    <section class="topics" aria-label="Topik">
+      <h2 id="topicsHead"></h2>
+      <div class="topic-list" id="topicList"></div>
+    </section>
+    <section class="stage" id="stage" aria-live="polite"></section>
+  </main>
 </div>
 
-<header class="top">
-  <div class="top-inner">
-    <svg class="logo" aria-hidden="true"><use href="#ndcLogo"/></svg>
-    <div class="brand"><b>NDC Learning</b><span>Learn • Practice • Grow</span></div>
-  </div>
-</header>
-
-<div class="hero">
-  <div class="hero-inner">
-    <h1>Kurikulum Soft Skill Tematik</h1>
-    <p>Program soft skill NDC Learning yang disusun per tema. Peserta bebas memilih tema sesuai kebutuhan, dan setiap tema naik bertahap dari dasar sampai proyek nyata.</p>
-    <div class="stats">
-      <div class="stat"><b>6</b><span>Tema</span></div>
-      <div class="stat"><b>24</b><span>Modul</span></div>
-      <div class="stat"><b>3 jam</b><span>per modul</span></div>
-      <div class="stat"><b>70%</b><span>Praktik</span></div>
-    </div>
-  </div>
-</div>
-
-<nav class="toc" aria-label="Daftar isi"><div class="wrap" id="tocWrap"></div></nav>
-
-<main id="content"></main>
-
-<footer>
-  <svg class="logo" aria-hidden="true"><use href="#ndcLogo"/></svg>
-  <div><b>NDC Learning &amp; Professional Community</b></div>
-  <div>Bridging Knowledge, People, and Opportunities</div>
-</footer>
-
-<!-- ============ PEMUTAR SUARA ============ -->
-<div id="player" aria-label="Pemutar narasi">
-  <div class="wrap">
-    <button id="prevBtn" title="Bagian sebelumnya" aria-label="Bagian sebelumnya">⏮</button>
-    <button id="playBtn" class="main" title="Putar / jeda" aria-label="Putar atau jeda">▶</button>
-    <button id="nextBtn" title="Bagian berikutnya" aria-label="Bagian berikutnya">⏭</button>
-    <button id="stopBtn" title="Berhenti" aria-label="Berhenti">⏹</button>
-    <div id="nowPlaying">
-      <b id="npTitle">Narasi siap diputar</b>
-      <span id="caption">Tekan ▶ untuk mendengarkan penjelasan lengkap.</span>
-      <div class="bar"><i id="progress"></i></div>
-    </div>
-    <select id="rateSel" aria-label="Kecepatan suara">
-      <option value="0.85">0.85×</option>
-      <option value="1" selected>1×</option>
-      <option value="1.15">1.15×</option>
-      <option value="1.3">1.3×</option>
-    </select>
-    <select id="voiceSel" aria-label="Pilih suara"></select>
-    <div id="voiceWarn">Suara Bahasa Indonesia tidak ditemukan di perangkat ini; narasi memakai suara lain yang tersedia.</div>
-  </div>
+<div class="caption" id="caption">
+  <div class="wave" aria-hidden="true"><span></span><span></span><span></span><span></span></div>
+  <p id="capText">Tekan Dengarkan pembukaan untuk mendengar narasi, atau Masuk untuk membuka katalog modul.</p>
 </div>
 
 <script>
-/* ==========================================================
-   DATA KURIKULUM
-   ========================================================== */
-const TEMA = [
-  {
-    id:"tema1", ic:"💬", kode:"KOM", judul:"Komunikasi Efektif",
-    desk:"Melatih peserta berbicara, mendengar, dan menulis dengan jelas dan percaya diri, di kampus maupun di tempat kerja.",
-    modul:[
-      ["KOM-1","Dasar Komunikasi & Mendengar Aktif","Model komunikasi, hambatan, mendengar aktif, bertanya terbuka","Permainan \"instruksi tanpa melihat\", latihan parafrase berpasangan","Lembar refleksi gaya komunikasi"],
-      ["KOM-2","Berbicara di Depan Umum","Struktur pembuka–isi–penutup, bahasa tubuh, mengatasi gugup","Presentasi 3 menit, direkam dan dinilai sesama peserta","Video presentasi + umpan balik"],
-      ["KOM-3","Komunikasi Tertulis Profesional","Email formal, laporan singkat, notulen, pesan WA kerja","Menulis ulang email dan laporan yang buruk menjadi ringkas","1 email + laporan 1 halaman"],
-      ["KOM-4","Proyek: Presentasi Teknis & Tanya Jawab","Menyusun slide sederhana, menjawab pertanyaan sulit, briefing kerja","Presentasi 7 menit di depan panel dengan sesi tanya jawab","Slide + rekaman presentasi untuk portofolio"]
-    ],
-    narasi:`Tema pertama adalah Komunikasi Efektif. Tema ini melatih peserta berbicara, mendengar, dan menulis dengan jelas dan percaya diri.
-Modul pertama, Dasar Komunikasi dan Mendengar Aktif. Peserta mengenal model komunikasi dan hambatannya, lalu berlatih mendengar aktif dan bertanya terbuka. Latihannya seru, misalnya permainan memberi instruksi tanpa melihat. Hasilnya, peserta membuat lembar refleksi tentang gaya komunikasinya sendiri.
-Modul kedua, Berbicara di Depan Umum. Peserta belajar menyusun pembuka, isi, dan penutup, memakai bahasa tubuh, dan mengatasi rasa gugup. Setiap peserta tampil tiga menit, direkam, lalu mendapat umpan balik dari teman-temannya.
-Modul ketiga, Komunikasi Tertulis Profesional. Fokusnya email formal, laporan singkat, notulen, dan pesan WhatsApp untuk urusan kerja. Peserta menulis ulang contoh email dan laporan yang buruk menjadi ringkas dan jelas.
-Modul keempat adalah proyek: Presentasi Teknis dan Tanya Jawab. Peserta menyiapkan slide sederhana, lalu presentasi tujuh menit di depan panel, termasuk menjawab pertanyaan sulit. Rekamannya bisa langsung masuk portofolio.`
-  },
-  {
-    id:"tema2", ic:"🤝", kode:"TIM", judul:"Kepemimpinan dan Kerja Sama Tim",
-    desk:"Membangun tanggung jawab, kemampuan bekerja dalam tim, mengambil keputusan, dan menyelesaikan konflik.",
-    modul:[
-      ["TIM-1","Dasar Kerja Tim","Tahap pembentukan tim, peran dalam tim, kepercayaan","Tantangan tim (menara kertas, teka-teki kelompok)","Kontrak tim"],
-      ["TIM-2","Mengelola Konflik & Memberi Umpan Balik","Gaya menyelesaikan konflik, umpan balik model SBI","Permainan peran konflik antaranggota","Rencana penyelesaian 1 kasus konflik"],
-      ["TIM-3","Memimpin Rapat & Mendelegasikan","Gaya kepemimpinan, delegasi, memimpin rapat efektif, mengambil keputusan bersama","Simulasi rapat dengan agenda, notulen, dan keputusan","Agenda + notulen rapat"],
-      ["TIM-4","Proyek: Memimpin Tim Kecil","Perencanaan tim, pembagian tugas, evaluasi kinerja tim","Memimpin tim 4–5 orang menyelesaikan tugas 3 jam","Laporan proyek tim + refleksi kepemimpinan"]
-    ],
-    narasi:`Tema kedua adalah Kepemimpinan dan Kerja Sama Tim. Di sini peserta belajar bertanggung jawab, bekerja bersama, mengambil keputusan, dan menyelesaikan konflik.
-Modul pertama, Dasar Kerja Tim. Peserta memahami tahap pembentukan tim, peran setiap anggota, dan pentingnya rasa saling percaya. Mereka langsung mencoba tantangan tim, seperti membangun menara kertas, lalu menyusun kontrak tim.
-Modul kedua, Mengelola Konflik dan Memberi Umpan Balik. Peserta mengenal berbagai gaya menyelesaikan konflik dan cara memberi umpan balik dengan model S B I, yaitu situasi, perilaku, dan dampak. Latihannya berupa permainan peran konflik antaranggota tim.
-Modul ketiga, Memimpin Rapat dan Mendelegasikan. Peserta belajar gaya kepemimpinan, cara membagi tugas, dan memimpin rapat yang efektif sampai menghasilkan keputusan. Output-nya agenda dan notulen rapat.
-Modul keempat adalah proyek: Memimpin Tim Kecil. Setiap peserta mendapat giliran memimpin tim empat sampai lima orang untuk menyelesaikan tugas selama tiga jam, lalu menulis laporan dan refleksi kepemimpinannya.`
-  },
-  {
-    id:"tema3", ic:"⏱️", kode:"WKT", judul:"Manajemen Waktu dan Produktivitas",
-    desk:"Membantu peserta mengatur waktu, menentukan prioritas, membangun disiplin, dan menyelesaikan pekerjaan tepat waktu.",
-    modul:[
-      ["WKT-1","Mengenali Pola Waktu & Menetapkan Tujuan","Audit waktu 1 minggu, SMART goals, kebiasaan yang menghambat","Mencatat dan menganalisis pemakaian waktu sendiri","Hasil audit waktu + 3 tujuan SMART"],
-      ["WKT-2","Prioritas & Perencanaan Mingguan","Matriks Eisenhower, time blocking, daftar tugas harian","Menyusun jadwal mingguan kuliah/kerja, organisasi, istirahat","Jadwal 2 minggu"],
-      ["WKT-3","Fokus, Prokrastinasi & Energi","Teknik Pomodoro, mengurangi gangguan gawai, menjaga energi dan istirahat","Tantangan fokus 7 hari dengan catatan harian","Jurnal fokus 7 hari"],
-      ["WKT-4","Proyek: Mengelola Banyak Tugas Sekaligus","Rincian pekerjaan, tenggat, jadwal Gantt sederhana, evaluasi","Merencanakan dan menjalankan 1 proyek kecil 2 minggu","Rencana proyek + laporan evaluasi"]
-    ],
-    narasi:`Tema ketiga adalah Manajemen Waktu dan Produktivitas. Tema ini membantu peserta mengatur waktu, menentukan prioritas, dan menyelesaikan pekerjaan tepat waktu.
-Modul pertama, Mengenali Pola Waktu dan Menetapkan Tujuan. Peserta mencatat pemakaian waktunya selama satu minggu, menemukan kebiasaan yang menghambat, lalu menyusun tiga tujuan dengan format SMART.
-Modul kedua, Prioritas dan Perencanaan Mingguan. Peserta memakai matriks Eisenhower untuk memilah tugas penting dan mendesak, serta teknik time blocking untuk menyusun jadwal dua minggu yang seimbang antara kuliah atau kerja, organisasi, dan istirahat.
-Modul ketiga, Fokus, Prokrastinasi, dan Energi. Peserta mencoba teknik Pomodoro, mengurangi gangguan dari gawai, dan belajar menjaga energi. Ada tantangan fokus tujuh hari dengan jurnal harian.
-Modul keempat adalah proyek: Mengelola Banyak Tugas Sekaligus. Peserta merinci pekerjaan, menetapkan tenggat, membuat jadwal Gantt sederhana, lalu menjalankan satu proyek kecil selama dua minggu dan mengevaluasinya.`
-  },
-  {
-    id:"tema4", ic:"🧠", kode:"BKR", judul:"Berpikir Kritis dan Pemecahan Masalah",
-    desk:"Melatih peserta menganalisis informasi, menemukan akar masalah, dan mengambil keputusan berdasarkan data.",
-    modul:[
-      ["BKR-1","Dasar Berpikir Kritis","Membedakan fakta dan opini, bias berpikir, mengecek sumber informasi","Menilai berita, unggahan media sosial, dan klaim iklan","Lembar analisis 3 informasi"],
-      ["BKR-2","Menemukan Akar Masalah","5 Why, diagram fishbone, mendefinisikan masalah dengan tepat","Menganalisis kasus praktikum atau pekerjaan yang gagal","Analisis fishbone 1 kasus"],
-      ["BKR-3","Mengambil Keputusan Berbasis Data","Membaca grafik dan tabel, matriks keputusan, menilai risiko","Studi kasus memilih solusi dari beberapa alternatif","Matriks keputusan + alasan pilihan"],
-      ["BKR-4","Proyek: Menyelesaikan Masalah Nyata","Siklus PDCA, menyusun usulan perbaikan, mempresentasikan solusi","Tim memecahkan 1 masalah nyata di kampus atau komunitas","Laporan usulan perbaikan (format A3)"]
-    ],
-    narasi:`Tema keempat adalah Berpikir Kritis dan Pemecahan Masalah. Peserta dilatih menganalisis informasi, menemukan akar masalah, dan mengambil keputusan berdasarkan data.
-Modul pertama, Dasar Berpikir Kritis. Peserta belajar membedakan fakta dan opini, mengenali bias berpikir, dan mengecek sumber informasi. Bahannya dekat dengan keseharian, seperti berita, unggahan media sosial, dan klaim iklan.
-Modul kedua, Menemukan Akar Masalah. Peserta memakai teknik lima kali bertanya mengapa dan diagram tulang ikan atau fishbone, untuk menganalisis kasus praktikum atau pekerjaan yang gagal.
-Modul ketiga, Mengambil Keputusan Berbasis Data. Peserta belajar membaca grafik dan tabel, menilai risiko, dan memakai matriks keputusan untuk memilih solusi terbaik dari beberapa alternatif.
-Modul keempat adalah proyek: Menyelesaikan Masalah Nyata. Dalam tim, peserta memakai siklus P D C A, yaitu Plan, Do, Check, Act, untuk memecahkan satu masalah nyata di kampus atau komunitas, lalu menuliskannya dalam laporan satu lembar format A3.`
-  },
-  {
-    id:"tema5", ic:"🎯", kode:"KAR", judul:"Persiapan Karier dan Profesionalisme",
-    desk:"Menyiapkan peserta memasuki dunia kerja: mengenal jalur karier, lolos seleksi, dan bersikap profesional.",
-    modul:[
-      ["KAR-1","Mengenal Diri & Peta Karier","Minat, kekuatan, nilai pribadi, peta karier sesuai jurusan","Inventori kekuatan, wawancara singkat dengan praktisi","Profil diri + peta karier 1 halaman"],
-      ["KAR-2","CV, Portofolio & LinkedIn","CV ramah sistem rekrutmen (ATS), menulis pencapaian, profil LinkedIn","Klinik CV: saling menilai CV dengan rubrik","CV final + profil LinkedIn"],
-      ["KAR-3","Wawancara & Assessment","Metode STAR, psikotes, diskusi kelompok (LGD)","Mock interview dan simulasi LGD dengan pengamat","Bank jawaban STAR (5 cerita) + lembar umpan balik"],
-      ["KAR-4","Proyek: Etika Profesional & Rencana 90 Hari","Integritas, budaya keselamatan, etika di tempat kerja, adaptasi pekerja baru","Studi kasus dilema etika, menyusun rencana kerja awal","Rencana 90 hari pertama"]
-    ],
-    narasi:`Tema kelima adalah Persiapan Karier dan Profesionalisme. Tema ini menyiapkan peserta memasuki dunia kerja, dari mengenal jalur karier sampai bersikap profesional.
-Modul pertama, Mengenal Diri dan Peta Karier. Peserta menggali minat, kekuatan, dan nilai pribadinya, lalu berbincang singkat dengan praktisi untuk menyusun peta karier satu halaman.
-Modul kedua, C V, Portofolio, dan LinkedIn. Peserta belajar menulis C V yang mudah dibaca sistem rekrutmen, menuliskan pencapaian, dan merapikan profil LinkedIn. Ada klinik C V, di mana peserta saling menilai memakai rubrik.
-Modul ketiga, Wawancara dan Assessment. Peserta berlatih menjawab dengan metode STAR, yaitu Situasi, Tugas, Aksi, dan Hasil. Mereka juga mengenal psikotes dan mengikuti simulasi diskusi kelompok dengan pengamat.
-Modul keempat adalah proyek: Etika Profesional dan Rencana Sembilan Puluh Hari. Peserta membahas integritas, budaya keselamatan, dan etika di tempat kerja, lalu menyusun rencana kerja untuk sembilan puluh hari pertama sebagai karyawan baru.`
-  },
-  {
-    id:"tema6", ic:"💡", kode:"KRE", judul:"Kreativitas dan Kemampuan Beradaptasi",
-    desk:"Mengembangkan cara berpikir kreatif dan kemampuan menyesuaikan diri dengan perubahan, teknologi baru, dan lingkungan kerja yang berbeda.",
-    modul:[
-      ["KRE-1","Dasar Berpikir Kreatif","Hambatan kreativitas, brainstorming, teknik SCAMPER, mind map","Menghasilkan 20 ide untuk 1 masalah sehari-hari","Peta ide + 3 ide terpilih"],
-      ["KRE-2","Growth Mindset & Belajar Hal Baru","Pola pikir bertumbuh, belajar dari kegagalan, belajar cepat dengan bantuan AI secara bertanggung jawab","Menguasai 1 keterampilan baru dalam 1 minggu dan melaporkannya","Jurnal belajar 1 minggu"],
-      ["KRE-3","Beradaptasi dengan Perubahan & Tekanan","Menghadapi perubahan rencana, mengelola stres, ketangguhan (resiliensi)","Simulasi situasi berubah mendadak (jadwal, tim, target)","Rencana menghadapi 2 skenario perubahan"],
-      ["KRE-4","Proyek: Design Thinking","Empati, definisi masalah, ide, prototipe, uji coba","Tim merancang solusi sederhana dan mengujinya ke calon pengguna","Prototipe + presentasi pitching 5 menit"]
-    ],
-    narasi:`Tema keenam adalah Kreativitas dan Kemampuan Beradaptasi. Tema ini mengembangkan cara berpikir kreatif dan kemampuan menyesuaikan diri dengan perubahan dan teknologi baru.
-Modul pertama, Dasar Berpikir Kreatif. Peserta mengenali hambatan kreativitas, lalu berlatih brainstorming, teknik SCAMPER, dan peta pikiran. Tantangannya, menghasilkan dua puluh ide untuk satu masalah sehari-hari.
-Modul kedua, Growth Mindset dan Belajar Hal Baru. Peserta membangun pola pikir bertumbuh, belajar dari kegagalan, dan belajar cepat dengan bantuan kecerdasan buatan secara bertanggung jawab. Selama satu minggu, peserta menguasai satu keterampilan baru dan mencatatnya di jurnal.
-Modul ketiga, Beradaptasi dengan Perubahan dan Tekanan. Peserta berlatih menghadapi perubahan mendadak, seperti jadwal, tim, atau target yang berubah, sambil belajar mengelola stres dan membangun ketangguhan.
-Modul keempat adalah proyek: Design Thinking. Dalam tim, peserta melewati tahap empati, definisi masalah, ide, prototipe, dan uji coba, lalu mempresentasikan solusinya dalam pitching lima menit.`
-  }
-];
+const LOGO_SRC = "data:image/jpeg;base64,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";
+const CFG = {"brandSub":"Kurikulum Soft Skill Tematik · Katalog Modul","topicsHead":"6 Tema","topicWord":"Tema","intro":{"eyebrow":"NDC Learning","title":"Kurikulum Soft Skill Tematik","tag":"Learn • Practice • Grow","tagId":"Bridging Knowledge, People, and Opportunities.","desc":["Kurikulum Soft Skill Tematik merupakan program soft skill NDC Learning yang disusun per tema. Peserta bebas memilih tema sesuai kebutuhan, dan setiap tema naik bertahap dari dasar sampai proyek nyata.","Program ini ditujukan untuk mahasiswa semua jurusan dan semester, lulusan baru, serta pekerja muda. Pendekatannya 30% materi dan 70% praktik melalui simulasi, permainan peran, studi kasus, dan proyek, dengan setiap modul berlangsung 3 jam."],"areasTitle":"Our Soft Skill Learning Themes","total":"Total: 24 Modul | 6 Tema | 72 Jam | 70% Praktik","mottos":[["Learn • Practice • Grow","Belajar, Berlatih, dan Berkembang."],["Bridging Knowledge, People, and Opportunities.","Menghubungkan Pengetahuan, Manusia, dan Peluang."]],"speech":["Selamat datang di NDC Learning and Professional Community. Learn, Practice, Grow.","Kurikulum Soft Skill Tematik merupakan program soft skill NDC Learning yang disusun per tema. Peserta bebas memilih tema sesuai kebutuhan, dan setiap tema naik bertahap dari dasar sampai proyek nyata.","Program ini ditujukan untuk mahasiswa semua jurusan dan semester, lulusan baru, serta pekerja muda. Pendekatannya tiga puluh persen materi dan tujuh puluh persen praktik, melalui simulasi, permainan peran, studi kasus, dan proyek. Setiap modul berlangsung tiga jam.","Terdapat enam tema: Komunikasi Efektif, Kepemimpinan dan Kerja Sama Tim, Manajemen Waktu dan Produktivitas, Berpikir Kritis dan Pemecahan Masalah, Persiapan Karier dan Profesionalisme, dan Kreativitas dan Kemampuan Beradaptasi. Setiap tema berisi empat modul, dengan total dua puluh empat modul.","Bridging Knowledge, People, and Opportunities.","Tekan tombol Masuk untuk membuka katalog modul."]},"overview":"Inilah katalog Kurikulum Soft Skill Tematik. Dua puluh empat modul dalam enam tema. Di setiap tema, modul naik bertahap dari level Dasar, Terapan, Lanjut, hingga Proyek.","closing":"Silakan pilih tema di sebelah kiri, lalu klik modul untuk mendengar penjelasannya. Learn, Practice, Grow, bersama NDC Learning.","levels":[{"name":"Dasar","from":0,"to":0,"range":"modul 1","c":"var(--l0)"},{"name":"Terapan","from":1,"to":1,"range":"modul 2","c":"var(--l1)"},{"name":"Lanjut","from":2,"to":2,"range":"modul 3","c":"var(--l2)"},{"name":"Proyek","from":3,"to":3,"range":"modul 4","c":"var(--l3)"}],"topics":[{"code":"KOM","name":"Komunikasi Efektif","spoken":"tema Komunikasi Efektif","lead":"Melatih peserta berbicara, mendengar, dan menulis dengan jelas dan percaya diri, di kampus maupun di tempat kerja.","say":"Tema pertama adalah Komunikasi Efektif. Tema ini melatih peserta berbicara, mendengar, dan menulis dengan jelas dan percaya diri.","mods":[{"code":"KOM-1","name":"Dasar Komunikasi & Mendengar Aktif","descLabel":"Topik inti","desc":"Model komunikasi, hambatan, mendengar aktif, bertanya terbuka","boxes":[["Praktik","Permainan \"instruksi tanpa melihat\", latihan parafrase berpasangan"],["Output","Lembar refleksi gaya komunikasi"]],"speak":"Modul pertama, Dasar Komunikasi dan Mendengar Aktif. Peserta mengenal model komunikasi dan hambatannya, lalu berlatih mendengar aktif dan bertanya terbuka. Latihannya seru, misalnya permainan memberi instruksi tanpa melihat. Hasilnya, peserta membuat lembar refleksi tentang gaya komunikasinya sendiri."},{"code":"KOM-2","name":"Berbicara di Depan Umum","descLabel":"Topik inti","desc":"Struktur pembuka–isi–penutup, bahasa tubuh, mengatasi gugup","boxes":[["Praktik","Presentasi 3 menit, direkam dan dinilai sesama peserta"],["Output","Video presentasi + umpan balik"]],"speak":"Modul kedua, Berbicara di Depan Umum. Peserta belajar menyusun pembuka, isi, dan penutup, memakai bahasa tubuh, dan mengatasi rasa gugup. Setiap peserta tampil tiga menit, direkam, lalu mendapat umpan balik dari teman-temannya."},{"code":"KOM-3","name":"Komunikasi Tertulis Profesional","descLabel":"Topik inti","desc":"Email formal, laporan singkat, notulen, pesan WA kerja","boxes":[["Praktik","Menulis ulang email dan laporan yang buruk menjadi ringkas"],["Output","1 email + laporan 1 halaman"]],"speak":"Modul ketiga, Komunikasi Tertulis Profesional. Fokusnya email formal, laporan singkat, notulen, dan pesan WhatsApp untuk urusan kerja. Peserta menulis ulang contoh email dan laporan yang buruk menjadi ringkas dan jelas."},{"code":"KOM-4","name":"Proyek: Presentasi Teknis & Tanya Jawab","descLabel":"Topik inti","desc":"Menyusun slide sederhana, menjawab pertanyaan sulit, briefing kerja","boxes":[["Praktik","Presentasi 7 menit di depan panel dengan sesi tanya jawab"],["Output","Slide + rekaman presentasi untuk portofolio"]],"speak":"Modul keempat adalah proyek: Presentasi Teknis dan Tanya Jawab. Peserta menyiapkan slide sederhana, lalu presentasi tujuh menit di depan panel, termasuk menjawab pertanyaan sulit. Rekamannya bisa langsung masuk portofolio."}]},{"code":"TIM","name":"Kepemimpinan dan Kerja Sama Tim","spoken":"tema Kepemimpinan dan Kerja Sama Tim","lead":"Membangun tanggung jawab, kemampuan bekerja dalam tim, mengambil keputusan, dan menyelesaikan konflik.","say":"Tema kedua adalah Kepemimpinan dan Kerja Sama Tim. Di sini peserta belajar bertanggung jawab, bekerja bersama, mengambil keputusan, dan menyelesaikan konflik.","mods":[{"code":"TIM-1","name":"Dasar Kerja Tim","descLabel":"Topik inti","desc":"Tahap pembentukan tim, peran dalam tim, kepercayaan","boxes":[["Praktik","Tantangan tim (menara kertas, teka-teki kelompok)"],["Output","Kontrak tim"]],"speak":"Modul pertama, Dasar Kerja Tim. Peserta memahami tahap pembentukan tim, peran setiap anggota, dan pentingnya rasa saling percaya. Mereka langsung mencoba tantangan tim, seperti membangun menara kertas, lalu menyusun kontrak tim."},{"code":"TIM-2","name":"Mengelola Konflik & Memberi Umpan Balik","descLabel":"Topik inti","desc":"Gaya menyelesaikan konflik, umpan balik model SBI","boxes":[["Praktik","Permainan peran konflik antaranggota"],["Output","Rencana penyelesaian 1 kasus konflik"]],"speak":"Modul kedua, Mengelola Konflik dan Memberi Umpan Balik. Peserta mengenal berbagai gaya menyelesaikan konflik dan cara memberi umpan balik dengan model S B I, yaitu situasi, perilaku, dan dampak. Latihannya berupa permainan peran konflik antaranggota tim."},{"code":"TIM-3","name":"Memimpin Rapat & Mendelegasikan","descLabel":"Topik inti","desc":"Gaya kepemimpinan, delegasi, memimpin rapat efektif, mengambil keputusan bersama","boxes":[["Praktik","Simulasi rapat dengan agenda, notulen, dan keputusan"],["Output","Agenda + notulen rapat"]],"speak":"Modul ketiga, Memimpin Rapat dan Mendelegasikan. Peserta belajar gaya kepemimpinan, cara membagi tugas, dan memimpin rapat yang efektif sampai menghasilkan keputusan. Output-nya agenda dan notulen rapat."},{"code":"TIM-4","name":"Proyek: Memimpin Tim Kecil","descLabel":"Topik inti","desc":"Perencanaan tim, pembagian tugas, evaluasi kinerja tim","boxes":[["Praktik","Memimpin tim 4–5 orang menyelesaikan tugas 3 jam"],["Output","Laporan proyek tim + refleksi kepemimpinan"]],"speak":"Modul keempat adalah proyek: Memimpin Tim Kecil. Setiap peserta mendapat giliran memimpin tim empat sampai lima orang untuk menyelesaikan tugas selama tiga jam, lalu menulis laporan dan refleksi kepemimpinannya."}]},{"code":"WKT","name":"Manajemen Waktu dan Produktivitas","spoken":"tema Manajemen Waktu dan Produktivitas","lead":"Membantu peserta mengatur waktu, menentukan prioritas, membangun disiplin, dan menyelesaikan pekerjaan tepat waktu.","say":"Tema ketiga adalah Manajemen Waktu dan Produktivitas. Tema ini membantu peserta mengatur waktu, menentukan prioritas, dan menyelesaikan pekerjaan tepat waktu.","mods":[{"code":"WKT-1","name":"Mengenali Pola Waktu & Menetapkan Tujuan","descLabel":"Topik inti","desc":"Audit waktu 1 minggu, SMART goals, kebiasaan yang menghambat","boxes":[["Praktik","Mencatat dan menganalisis pemakaian waktu sendiri"],["Output","Hasil audit waktu + 3 tujuan SMART"]],"speak":"Modul pertama, Mengenali Pola Waktu dan Menetapkan Tujuan. Peserta mencatat pemakaian waktunya selama satu minggu, menemukan kebiasaan yang menghambat, lalu menyusun tiga tujuan dengan format SMART."},{"code":"WKT-2","name":"Prioritas & Perencanaan Mingguan","descLabel":"Topik inti","desc":"Matriks Eisenhower, time blocking, daftar tugas harian","boxes":[["Praktik","Menyusun jadwal mingguan kuliah/kerja, organisasi, istirahat"],["Output","Jadwal 2 minggu"]],"speak":"Modul kedua, Prioritas dan Perencanaan Mingguan. Peserta memakai matriks Eisenhower untuk memilah tugas penting dan mendesak, serta teknik time blocking untuk menyusun jadwal dua minggu yang seimbang antara kuliah atau kerja, organisasi, dan istirahat."},{"code":"WKT-3","name":"Fokus, Prokrastinasi & Energi","descLabel":"Topik inti","desc":"Teknik Pomodoro, mengurangi gangguan gawai, menjaga energi dan istirahat","boxes":[["Praktik","Tantangan fokus 7 hari dengan catatan harian"],["Output","Jurnal fokus 7 hari"]],"speak":"Modul ketiga, Fokus, Prokrastinasi, dan Energi. Peserta mencoba teknik Pomodoro, mengurangi gangguan dari gawai, dan belajar menjaga energi. Ada tantangan fokus tujuh hari dengan jurnal harian."},{"code":"WKT-4","name":"Proyek: Mengelola Banyak Tugas Sekaligus","descLabel":"Topik inti","desc":"Rincian pekerjaan, tenggat, jadwal Gantt sederhana, evaluasi","boxes":[["Praktik","Merencanakan dan menjalankan 1 proyek kecil 2 minggu"],["Output","Rencana proyek + laporan evaluasi"]],"speak":"Modul keempat adalah proyek: Mengelola Banyak Tugas Sekaligus. Peserta merinci pekerjaan, menetapkan tenggat, membuat jadwal Gantt sederhana, lalu menjalankan satu proyek kecil selama dua minggu dan mengevaluasinya."}]},{"code":"BKR","name":"Berpikir Kritis dan Pemecahan Masalah","spoken":"tema Berpikir Kritis dan Pemecahan Masalah","lead":"Melatih peserta menganalisis informasi, menemukan akar masalah, dan mengambil keputusan berdasarkan data.","say":"Tema keempat adalah Berpikir Kritis dan Pemecahan Masalah. Peserta dilatih menganalisis informasi, menemukan akar masalah, dan mengambil keputusan berdasarkan data.","mods":[{"code":"BKR-1","name":"Dasar Berpikir Kritis","descLabel":"Topik inti","desc":"Membedakan fakta dan opini, bias berpikir, mengecek sumber informasi","boxes":[["Praktik","Menilai berita, unggahan media sosial, dan klaim iklan"],["Output","Lembar analisis 3 informasi"]],"speak":"Modul pertama, Dasar Berpikir Kritis. Peserta belajar membedakan fakta dan opini, mengenali bias berpikir, dan mengecek sumber informasi. Bahannya dekat dengan keseharian, seperti berita, unggahan media sosial, dan klaim iklan."},{"code":"BKR-2","name":"Menemukan Akar Masalah","descLabel":"Topik inti","desc":"5 Why, diagram fishbone, mendefinisikan masalah dengan tepat","boxes":[["Praktik","Menganalisis kasus praktikum atau pekerjaan yang gagal"],["Output","Analisis fishbone 1 kasus"]],"speak":"Modul kedua, Menemukan Akar Masalah. Peserta memakai teknik lima kali bertanya mengapa dan diagram tulang ikan atau fishbone, untuk menganalisis kasus praktikum atau pekerjaan yang gagal."},{"code":"BKR-3","name":"Mengambil Keputusan Berbasis Data","descLabel":"Topik inti","desc":"Membaca grafik dan tabel, matriks keputusan, menilai risiko","boxes":[["Praktik","Studi kasus memilih solusi dari beberapa alternatif"],["Output","Matriks keputusan + alasan pilihan"]],"speak":"Modul ketiga, Mengambil Keputusan Berbasis Data. Peserta belajar membaca grafik dan tabel, menilai risiko, dan memakai matriks keputusan untuk memilih solusi terbaik dari beberapa alternatif."},{"code":"BKR-4","name":"Proyek: Menyelesaikan Masalah Nyata","descLabel":"Topik inti","desc":"Siklus PDCA, menyusun usulan perbaikan, mempresentasikan solusi","boxes":[["Praktik","Tim memecahkan 1 masalah nyata di kampus atau komunitas"],["Output","Laporan usulan perbaikan (format A3)"]],"speak":"Modul keempat adalah proyek: Menyelesaikan Masalah Nyata. Dalam tim, peserta memakai siklus P D C A, yaitu Plan, Do, Check, Act, untuk memecahkan satu masalah nyata di kampus atau komunitas, lalu menuliskannya dalam laporan satu lembar format A3."}]},{"code":"KAR","name":"Persiapan Karier dan Profesionalisme","spoken":"tema Persiapan Karier dan Profesionalisme","lead":"Menyiapkan peserta memasuki dunia kerja: mengenal jalur karier, lolos seleksi, dan bersikap profesional.","say":"Tema kelima adalah Persiapan Karier dan Profesionalisme. Tema ini menyiapkan peserta memasuki dunia kerja, dari mengenal jalur karier sampai bersikap profesional.","mods":[{"code":"KAR-1","name":"Mengenal Diri & Peta Karier","descLabel":"Topik inti","desc":"Minat, kekuatan, nilai pribadi, peta karier sesuai jurusan","boxes":[["Praktik","Inventori kekuatan, wawancara singkat dengan praktisi"],["Output","Profil diri + peta karier 1 halaman"]],"speak":"Modul pertama, Mengenal Diri dan Peta Karier. Peserta menggali minat, kekuatan, dan nilai pribadinya, lalu berbincang singkat dengan praktisi untuk menyusun peta karier satu halaman."},{"code":"KAR-2","name":"CV, Portofolio & LinkedIn","descLabel":"Topik inti","desc":"CV ramah sistem rekrutmen (ATS), menulis pencapaian, profil LinkedIn","boxes":[["Praktik","Klinik CV: saling menilai CV dengan rubrik"],["Output","CV final + profil LinkedIn"]],"speak":"Modul kedua, C V, Portofolio, dan LinkedIn. Peserta belajar menulis C V yang mudah dibaca sistem rekrutmen, menuliskan pencapaian, dan merapikan profil LinkedIn. Ada klinik C V, di mana peserta saling menilai memakai rubrik."},{"code":"KAR-3","name":"Wawancara & Assessment","descLabel":"Topik inti","desc":"Metode STAR, psikotes, diskusi kelompok (LGD)","boxes":[["Praktik","Mock interview dan simulasi LGD dengan pengamat"],["Output","Bank jawaban STAR (5 cerita) + lembar umpan balik"]],"speak":"Modul ketiga, Wawancara dan Assessment. Peserta berlatih menjawab dengan metode STAR, yaitu Situasi, Tugas, Aksi, dan Hasil. Mereka juga mengenal psikotes dan mengikuti simulasi diskusi kelompok dengan pengamat."},{"code":"KAR-4","name":"Proyek: Etika Profesional & Rencana 90 Hari","descLabel":"Topik inti","desc":"Integritas, budaya keselamatan, etika di tempat kerja, adaptasi pekerja baru","boxes":[["Praktik","Studi kasus dilema etika, menyusun rencana kerja awal"],["Output","Rencana 90 hari pertama"]],"speak":"Modul keempat adalah proyek: Etika Profesional dan Rencana Sembilan Puluh Hari. Peserta membahas integritas, budaya keselamatan, dan etika di tempat kerja, lalu menyusun rencana kerja untuk sembilan puluh hari pertama sebagai karyawan baru."}]},{"code":"KRE","name":"Kreativitas dan Kemampuan Beradaptasi","spoken":"tema Kreativitas dan Kemampuan Beradaptasi","lead":"Mengembangkan cara berpikir kreatif dan kemampuan menyesuaikan diri dengan perubahan, teknologi baru, dan lingkungan kerja yang berbeda.","say":"Tema keenam adalah Kreativitas dan Kemampuan Beradaptasi. Tema ini mengembangkan cara berpikir kreatif dan kemampuan menyesuaikan diri dengan perubahan dan teknologi baru.","mods":[{"code":"KRE-1","name":"Dasar Berpikir Kreatif","descLabel":"Topik inti","desc":"Hambatan kreativitas, brainstorming, teknik SCAMPER, mind map","boxes":[["Praktik","Menghasilkan 20 ide untuk 1 masalah sehari-hari"],["Output","Peta ide + 3 ide terpilih"]],"speak":"Modul pertama, Dasar Berpikir Kreatif. Peserta mengenali hambatan kreativitas, lalu berlatih brainstorming, teknik SCAMPER, dan peta pikiran. Tantangannya, menghasilkan dua puluh ide untuk satu masalah sehari-hari."},{"code":"KRE-2","name":"Growth Mindset & Belajar Hal Baru","descLabel":"Topik inti","desc":"Pola pikir bertumbuh, belajar dari kegagalan, belajar cepat dengan bantuan AI secara bertanggung jawab","boxes":[["Praktik","Menguasai 1 keterampilan baru dalam 1 minggu dan melaporkannya"],["Output","Jurnal belajar 1 minggu"]],"speak":"Modul kedua, Growth Mindset dan Belajar Hal Baru. Peserta membangun pola pikir bertumbuh, belajar dari kegagalan, dan belajar cepat dengan bantuan kecerdasan buatan secara bertanggung jawab. Selama satu minggu, peserta menguasai satu keterampilan baru dan mencatatnya di jurnal."},{"code":"KRE-3","name":"Beradaptasi dengan Perubahan & Tekanan","descLabel":"Topik inti","desc":"Menghadapi perubahan rencana, mengelola stres, ketangguhan (resiliensi)","boxes":[["Praktik","Simulasi situasi berubah mendadak (jadwal, tim, target)"],["Output","Rencana menghadapi 2 skenario perubahan"]],"speak":"Modul ketiga, Beradaptasi dengan Perubahan dan Tekanan. Peserta berlatih menghadapi perubahan mendadak, seperti jadwal, tim, atau target yang berubah, sambil belajar mengelola stres dan membangun ketangguhan."},{"code":"KRE-4","name":"Proyek: Design Thinking","descLabel":"Topik inti","desc":"Empati, definisi masalah, ide, prototipe, uji coba","boxes":[["Praktik","Tim merancang solusi sederhana dan mengujinya ke calon pengguna"],["Output","Prototipe + presentasi pitching 5 menit"]],"speak":"Modul keempat adalah proyek: Design Thinking. Dalam tim, peserta melewati tahap empati, definisi masalah, ide, prototipe, dan uji coba, lalu mempresentasikan solusinya dalam pitching lima menit."}]}]};
 
-const LEVEL = [
-  ["Dasar","Memahami konsep dan mengenali kebiasaan diri","Refleksi diri, latihan sederhana"],
-  ["Terapan","Menerapkan alat atau teknik di situasi kampus","Latihan terstruktur dengan umpan balik"],
-  ["Lanjut","Menghadapi situasi sulit dan situasi kerja industri","Simulasi, permainan peran, studi kasus"],
-  ["Proyek","Membuktikan keterampilan lewat tugas nyata","Produk atau presentasi yang masuk portofolio"]
-];
+const esc = s => String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
+const TOPICS = CFG.topics, LEVELS = CFG.levels;
+const lvOf = i => LEVELS.findIndex(l => i>=l.from && i<=l.to);
+const pad = i => String(i+1).padStart(2,"0");
 
-/* ==========================================================
-   NARASI BAGIAN UMUM
-   ========================================================== */
-const NARASI = {
-  pembuka:`Selamat datang di NDC Learning and Professional Community. Learn, Practice, Grow. Bridging Knowledge, People, and Opportunities.
-Halaman ini memperkenalkan Kurikulum Soft Skill Tematik NDC Learning. Program ini terdiri dari enam tema, dan setiap tema berisi empat modul, sehingga totalnya dua puluh empat modul.
-Anda bisa mendengarkan seluruh penjelasan dari awal sampai akhir, atau menekan tombol Dengarkan di setiap bagian untuk mendengar bagian tertentu saja. Mari kita mulai.`,
-  ringkasan:`Kita mulai dari ringkasan program.
-Kurikulum ini ditujukan untuk mahasiswa dari semua jurusan dan semester, lulusan baru, serta pekerja muda dengan pengalaman nol sampai tiga tahun.
-Strukturnya enam tema kali empat modul. Setiap modul berlangsung tiga jam dalam satu sesi. Jadi satu tema membutuhkan dua belas jam, yang bisa dijalankan dalam empat pertemuan mingguan atau dua hari pelatihan. Seluruh tema berjumlah tujuh puluh dua jam.
-Pendekatannya tiga puluh persen materi dan tujuh puluh persen praktik, melalui simulasi, permainan peran, studi kasus, dan proyek. Setiap tugas praktik dinilai dengan rubrik empat tingkat, dan peserta mendapat sertifikat per tema serta portofolio hasil praktik.
-Bedanya dengan kurikulum per semester Kampus sampai Siap Kerja: program tematik ini dijual per tema sebagai pelatihan singkat, sedangkan kurikulum per semester adalah jalur pendampingan panjang dari semester satu sampai lulus.`,
-  level:`Selanjutnya, level modul. Urutan empat modul selalu sama di setiap tema, sehingga peserta mudah melihat kemajuannya.
-Modul pertama adalah level Dasar. Fokusnya memahami konsep dan mengenali kebiasaan diri.
-Modul kedua adalah level Terapan. Peserta menerapkan alat atau teknik pada situasi kampus, dengan umpan balik dari fasilitator.
-Modul ketiga adalah level Lanjut. Peserta menghadapi situasi sulit dan situasi kerja di industri melalui simulasi dan studi kasus.
-Modul keempat adalah level Proyek. Peserta membuktikan keterampilannya lewat tugas nyata yang hasilnya masuk portofolio.
-Modul pertama bisa diikuti tanpa syarat. Modul dua sampai empat sebaiknya diikuti berurutan, tetapi peserta yang sudah berpengalaman boleh langsung masuk setelah tes penempatan singkat.`,
-  paket:`Sekarang, paket pelatihan dan penilaian. Karena setiap tema berdiri sendiri, program ini bisa ditawarkan dalam beberapa bentuk.
-Pertama, kelas satu modul, tiga jam, cocok untuk webinar, kuliah tamu, atau uji coba peserta baru.
-Kedua, kelas tema, berisi empat modul atau dua belas jam, cocok untuk pelatihan umum dan himpunan mahasiswa.
-Ketiga, paket tiga tema, misalnya Komunikasi, Kerja Tim, dan Karier, untuk persiapan magang atau kerja.
-Keempat, program lengkap dua puluh empat modul, untuk kerja sama dengan kampus atau organisasi.
-Penilaian memakai rubrik empat tingkat: Mulai, Berkembang, Cakap, dan Teladan. Modul dinyatakan selesai jika peserta hadir, mengumpulkan output, dan minimal mencapai tingkat Berkembang.
-Peserta yang menyelesaikan empat modul dalam satu tema mendapat sertifikat tema. Peserta yang menuntaskan keenam tema mendapat sertifikat NDC Soft Skill Professional.`,
-  hubungan:`Terakhir, hubungan dengan kurikulum per semester. Kedua program saling melengkapi dan memakai rubrik yang sama, sehingga hasil peserta bisa diakui di keduanya.
-Kurikulum per semester terdiri dari empat tahap dan dua puluh modul, diikuti berurutan dari semester satu sampai lulus, dan dilengkapi Soft Skill Passport serta Bootcamp.
-Kurikulum tematik terdiri dari enam tema dan dua puluh empat modul, bisa dipilih bebas, dan berbentuk pelatihan singkat per tema.
-Di website NDC Learning, kurikulum tematik tampil sebagai enam kartu di halaman Soft Skill Development.`,
-  penutup:`Itulah penjelasan lengkap Kurikulum Soft Skill Tematik NDC Learning. Pilih tema yang paling Anda butuhkan, dan mulailah berlatih.
-Terima kasih telah mendengarkan. Learn, Practice, Grow, bersama NDC Learning.`
-};
+/* ---------- Opening ---------- */
+const I = CFG.intro;
+document.getElementById("introInner").innerHTML = `
+  <div class="logo-wrap" id="bigLogo"><img src="${LOGO_SRC}" alt="Logo NDC Learning &amp; Professional Community"></div>
+  <div class="intro-eyebrow">${esc(I.eyebrow)}</div>
+  <h1 class="intro-title">${esc(I.title)}</h1>
+  <p class="intro-tag">${esc(I.tag)}</p>
+  <p class="intro-tag-id">${esc(I.tagId)}</p>
+  <div class="intro-desc">${I.desc.map(p=>`<p>${esc(p)}</p>`).join("")}</div>
+  <div class="areas"><h2>${esc(I.areasTitle)}</h2>
+    ${TOPICS.map(t=>`<div class="area"><span class="c">${esc(t.code)}</span><div><b>${esc(t.short||t.name)}</b><span>${t.mods.length} Modul</span></div></div>`).join("")}
+  </div>
+  <div class="total">${esc(I.total)}</div>
+  ${I.mottos.map(m=>`<div class="motto"><b>${esc(m[0])}</b><span>${esc(m[1])}</span></div>`).join("")}
+  <div class="intro-actions">
+    <button class="btn-listen" id="btnListen" aria-pressed="false">🔊 Dengarkan pembukaan</button>
+    <button class="btn-start" id="btnStart">Masuk ▶</button>
+  </div>
+  <div class="intro-note">Nyalakan suara perangkat Anda. Narasi memakai suara otomatis Bahasa Indonesia.</div>`;
+document.getElementById("miniLogo").innerHTML = `<img src="${LOGO_SRC}" alt="Logo NDC">`;
+document.getElementById("brandSub").textContent = CFG.brandSub;
+document.getElementById("topicsHead").textContent = CFG.topicsHead;
 
-/* ==========================================================
-   RENDER HALAMAN
-   ========================================================== */
-const esc = s => s.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
-const listenBtn = id => `<button class="listen" data-listen="${id}">🔊 Dengarkan</button>`;
-
-function secHead(id, eyebrow, title){
-  return `<div class="sec-head"><div><span class="eyebrow">${eyebrow}</span><h2>${title}</h2></div>${listenBtn(id)}</div>`;
-}
-
-let html = "";
-
-html += `<section class="block" id="pembuka" data-title="Pembuka">
-  ${secHead("pembuka","Selamat datang","Tentang Kurikulum Ini")}
-  <p class="lead">Program soft skill NDC Learning: 6 tema × 4 modul = 24 modul. Peserta bebas memilih tema sesuai kebutuhan, terpisah dari kurikulum per semester "Kampus sampai Siap Kerja".</p>
-  <div class="themes">${TEMA.map(t=>`<a class="theme-chip" href="#${t.id}"><span class="ic">${t.ic}</span>${t.judul}</a>`).join("")}</div>
-</section>`;
-
-html += `<section class="block" id="ringkasan" data-title="Ringkasan program">
-  ${secHead("ringkasan","Bagian 1","Ringkasan Program")}
-  <p class="lead">Setiap tema berdiri sendiri dan bisa diikuti tanpa urutan. Di dalam satu tema, keempat modul naik bertahap dari dasar sampai proyek nyata.</p>
-  <div class="table-wrap"><table>
-    <tr><th style="width:28%">Item</th><th>Keterangan</th></tr>
-    <tr><td>Sasaran</td><td>Mahasiswa semua jurusan dan semester, lulusan baru, pekerja muda (0–3 tahun)</td></tr>
-    <tr><td>Struktur</td><td>6 tema × 4 modul = 24 modul; tiap modul 3 jam (1 sesi)</td></tr>
-    <tr><td>Durasi per tema</td><td>12 jam: 4 sesi mingguan atau 2 hari pelatihan</td></tr>
-    <tr><td>Total waktu</td><td>72 jam untuk seluruh tema</td></tr>
-    <tr><td>Pendekatan</td><td>30% materi, 70% praktik: simulasi, permainan peran, studi kasus, proyek</td></tr>
-    <tr><td>Penilaian</td><td>Tugas praktik per modul dengan rubrik 4 tingkat (Mulai, Berkembang, Cakap, Teladan)</td></tr>
-    <tr><td>Keluaran</td><td>Sertifikat per tema dan portofolio hasil praktik</td></tr>
-  </table></div>
-  <div class="note">Program ini dijual per tema (pelatihan singkat), sedangkan "Kampus sampai Siap Kerja" adalah jalur pendampingan panjang dari semester 1 sampai lulus.</div>
-</section>`;
-
-html += `<section class="block" id="level" data-title="Level modul">
-  ${secHead("level","Bagian 2","Level Modul")}
-  <p class="lead">Urutan 4 modul sama di setiap tema, sehingga peserta mudah melihat kemajuannya.</p>
-  <div class="levels">${LEVEL.map((l,i)=>`<div class="level"><span class="n">${i+1}</span><b>${l[0]}</b><p>${l[1]}</p><p><i>Contoh hasil:</i> ${l[2]}</p></div>`).join("")}</div>
-  <div class="note">Modul 1 tanpa syarat. Modul 2–4 disarankan berurutan, tetapi peserta berpengalaman boleh langsung ikut setelah tes penempatan singkat.</div>
-</section>`;
-
-TEMA.forEach((t,ti)=>{
-  html += `<section class="block" id="${t.id}" data-title="Tema ${ti+1}: ${t.judul}">
-    ${secHead(t.id,`Tema ${ti+1} · ${t.kode}`,`${t.ic} ${t.judul}`)}
-    <p class="lead">${t.desk}</p>
-    <div class="modules">${t.modul.map((m,i)=>`
-      <div class="mod">
-        <span class="tag ${i===3?"l4":""}">Level ${LEVEL[i][0]}</span>
-        <h3><span class="kode">${m[0]}</span><br>${esc(m[1])}</h3>
-        <dl><dt>Topik inti</dt><dd>${esc(m[2])}</dd>
-            <dt>Praktik</dt><dd>${esc(m[3])}</dd>
-            <dt>Output</dt><dd>${esc(m[4])}</dd></dl>
-      </div>`).join("")}</div>
-  </section>`;
-});
-
-html += `<section class="block" id="paket" data-title="Paket pelatihan dan penilaian">
-  ${secHead("paket","Bagian 3","Paket Pelatihan dan Penilaian")}
-  <p class="lead">Karena tiap tema berdiri sendiri, program ini mudah ditawarkan dalam beberapa bentuk.</p>
-  <div class="table-wrap"><table>
-    <tr><th>Paket</th><th>Isi</th><th>Cocok untuk</th></tr>
-    <tr><td>Kelas 1 modul</td><td>1 sesi 3 jam</td><td>Webinar, kuliah tamu, uji coba peserta baru</td></tr>
-    <tr><td>Kelas tema</td><td>4 modul (12 jam), 4 pekan atau 2 hari</td><td>Pelatihan umum, himpunan mahasiswa</td></tr>
-    <tr><td>Paket 3 tema</td><td>12 modul pilihan, misalnya Komunikasi + Tim + Karier</td><td>Persiapan magang atau kerja</td></tr>
-    <tr><td>Program lengkap</td><td>24 modul</td><td>Kerja sama dengan kampus atau organisasi</td></tr>
-  </table></div>
-  <p>Penilaian memakai rubrik 4 tingkat: <b>Mulai</b>, <b>Berkembang</b>, <b>Cakap</b>, <b>Teladan</b>. Modul selesai jika peserta hadir, mengumpulkan output, dan minimal mencapai tingkat 2.</p>
-  <ul class="clean">
-    <li><b>Sertifikat tema:</b> menyelesaikan 4 modul satu tema.</li>
-    <li><b>Sertifikat NDC Soft Skill Professional:</b> menyelesaikan seluruh 6 tema.</li>
-  </ul>
-</section>`;
-
-html += `<section class="block" id="hubungan" data-title="Hubungan dengan kurikulum per semester">
-  ${secHead("hubungan","Bagian 4","Hubungan dengan Kurikulum per Semester")}
-  <p class="lead">Dua program ini saling melengkapi dan memakai rubrik yang sama, sehingga hasil peserta bisa diakui di keduanya.</p>
-  <div class="table-wrap"><table>
-    <tr><th>Aspek</th><th>Kurikulum per semester<br>(Kampus sampai Siap Kerja)</th><th>Kurikulum tematik<br>(halaman ini)</th></tr>
-    <tr><td>Struktur</td><td>4 tahap × 5 modul = 20 modul</td><td>6 tema × 4 modul = 24 modul</td></tr>
-    <tr><td>Cara mengikuti</td><td>Berurutan dari semester 1 sampai lulus</td><td>Bebas memilih tema</td></tr>
-    <tr><td>Sasaran</td><td>Mahasiswa yang didampingi jangka panjang</td><td>Mahasiswa, lulusan baru, pekerja muda</td></tr>
-    <tr><td>Bentuk</td><td>Pendampingan, Soft Skill Passport, Bootcamp</td><td>Pelatihan singkat per tema</td></tr>
-    <tr><td>Di website</td><td>Halaman "Kampus sampai Siap Kerja"</td><td>6 kartu di halaman Soft Skill Development</td></tr>
-  </table></div>
-</section>`;
-
-html += `<section class="block" id="penutup" data-title="Penutup">
-  ${secHead("penutup","Penutup","Siap Mulai Berlatih?")}
-  <p class="lead">Pilih tema yang paling Anda butuhkan dan mulai berlatih bersama NDC Learning. <b>Learn • Practice • Grow.</b></p>
-</section>`;
-
-document.getElementById("content").innerHTML = html;
-
-/* Daftar isi */
-const tocItems = [["pembuka","Pembuka"],["ringkasan","Ringkasan"],["level","Level"],
-  ...TEMA.map((t,i)=>[t.id,`${i+1}. ${t.judul.split(" ")[0]}`]),["paket","Paket"],["hubungan","Hubungan"],["penutup","Penutup"]];
-document.getElementById("tocWrap").innerHTML = tocItems.map(([id,l])=>`<a href="#${id}" data-toc="${id}">${l}</a>`).join("");
-
-/* ==========================================================
-   NARASI SUARA (Web Speech API)
-   ========================================================== */
-const ORDER = ["pembuka","ringkasan","level",...TEMA.map(t=>t.id),"paket","hubungan","penutup"];
-const TEXT = id => NARASI[id] || (TEMA.find(t=>t.id===id)||{}).narasi || "";
-const TITLE = id => document.getElementById(id)?.dataset.title || id;
-
+/* ---------- Speech ---------- */
 const synth = window.speechSynthesis;
-const $ = id => document.getElementById(id);
-let voices = [], chunks = [], chunkIdx = 0, secIdx = 0, playing = false, paused = false, singleMode = false, token = 0;
-
-function loadVoices(){
+let muted = false, voice = null, runId = 0;
+const cap = document.getElementById("caption"), capText = document.getElementById("capText");
+function pickVoice(){
   if(!synth) return;
-  voices = synth.getVoices();
-  const id = voices.filter(v=>/^id|ind/i.test(v.lang));
-  const list = id.length ? id : voices;
-  $("voiceWarn").style.display = (voices.length && !id.length) ? "block" : "none";
-  $("voiceSel").style.visibility = list.length ? "visible" : "hidden";
-  const prev = $("voiceSel").value;
-  $("voiceSel").innerHTML = list.map(v=>`<option value="${esc(v.name)}">${esc(v.name)}</option>`).join("");
-  if(prev && list.some(v=>v.name===prev)) $("voiceSel").value = prev;
-  else {
-    const best = id.find(v=>/google/i.test(v.name)) || id.find(v=>/online|natural/i.test(v.name)) || id[0];
-    if(best) $("voiceSel").value = best.name;
+  const vs = synth.getVoices();
+  voice = vs.find(v=>/id[-_]ID/i.test(v.lang) && /google|natural|online/i.test(v.name)) || vs.find(v=>/^id/i.test(v.lang)) || null;
+}
+if(synth){ pickVoice(); synth.onvoiceschanged = pickVoice; }
+const wait = ms => new Promise(r=>setTimeout(r,ms));
+async function say(text, id){
+  capText.textContent = text;
+  const parts = text.match(/[^.!?]+[.!?]*/g) || [text];
+  cap.classList.add("talk");
+  for(const p of parts){
+    if(id !== runId) break;
+    if(muted || !synth){ await wait(Math.max(1600, p.length*55)); continue; }
+    await new Promise(res=>{
+      const u = new SpeechSynthesisUtterance(p.trim());
+      u.lang = "id-ID"; if(voice) u.voice = voice; u.rate = 1; u.pitch = 1;
+      const guard = setTimeout(res, Math.max(4000, p.length*120));
+      u.onend = u.onerror = ()=>{ clearTimeout(guard); res(); };
+      synth.speak(u);
+    });
   }
+  if(id === runId) cap.classList.remove("talk");
 }
-if(synth){ loadVoices(); synth.onvoiceschanged = loadVoices; }
+function stopAll(){ runId++; if(synth) synth.cancel(); cap.classList.remove("talk"); }
 
-/* Pecah teks panjang menjadi potongan pendek agar tidak terpotong di Chrome */
-function splitText(t){
-  const sentences = t.replace(/\s+/g," ").match(/[^.!?]+[.!?]*/g) || [t];
-  const out = []; let buf = "";
-  sentences.forEach(s=>{
-    s = s.trim(); if(!s) return;
-    if((buf+" "+s).length > 180 && buf){ out.push(buf); buf = s; }
-    else buf = buf ? buf+" "+s : s;
-  });
-  if(buf) out.push(buf);
-  return out;
-}
-
-function highlight(id){
-  document.querySelectorAll("section.block").forEach(s=>s.classList.toggle("speaking", s.id===id));
-  document.querySelectorAll("[data-toc]").forEach(a=>a.classList.toggle("active", a.dataset.toc===id));
-  const el = $(id); if(el) el.scrollIntoView({behavior:"smooth",block:"start"});
-}
-
-function updateUI(){
-  $("playBtn").textContent = (playing && !paused) ? "⏸" : "▶";
-}
-
-function playSection(i){
-  if(!synth){ alert("Peramban ini belum mendukung narasi suara. Silakan gunakan Chrome atau Edge."); return; }
-  token++; synth.cancel();
-  secIdx = Math.max(0, Math.min(ORDER.length-1, i));
-  const id = ORDER[secIdx];
-  chunks = splitText(TEXT(id)); chunkIdx = 0;
-  playing = true; paused = false;
-  $("npTitle").textContent = TITLE(id);
-  highlight(id); updateUI();
-  speakNext(token);
-}
-
-function speakNext(myToken){
-  if(myToken !== token) return;
-  if(chunkIdx >= chunks.length){
-    if(!singleMode && secIdx < ORDER.length-1){ setTimeout(()=>{ if(myToken===token) playSection(secIdx+1); }, 500); }
-    else finish();
-    return;
-  }
-  const u = new SpeechSynthesisUtterance(chunks[chunkIdx]);
-  const v = voices.find(x=>x.name===$("voiceSel").value);
-  if(v){ u.voice = v; u.lang = v.lang; } else u.lang = "id-ID";
-  u.rate = parseFloat($("rateSel").value); u.pitch = 1;
-  $("caption").textContent = chunks[chunkIdx];
-  $("progress").style.width = Math.round(((secIdx + chunkIdx/chunks.length)/ORDER.length)*100) + "%";
-  u.onend = ()=>{ if(myToken!==token) return; chunkIdx++; speakNext(myToken); };
-  u.onerror = e=>{ if(myToken!==token || e.error==="interrupted" || e.error==="canceled") return; chunkIdx++; speakNext(myToken); };
-  synth.speak(u);
-}
-
-function finish(){
-  playing = false; paused = false; updateUI();
-  $("caption").textContent = "Narasi selesai. Tekan ▶ untuk mengulang.";
-  if(!singleMode) $("progress").style.width = "100%";
-  document.querySelectorAll("section.block").forEach(s=>s.classList.remove("speaking"));
-}
-
-function stopAll(){
-  token++; if(synth) synth.cancel();
-  playing = false; paused = false; updateUI();
-  $("caption").textContent = "Narasi dihentikan.";
-  document.querySelectorAll("section.block").forEach(s=>s.classList.remove("speaking"));
-}
-
-$("playBtn").onclick = ()=>{
-  if(!playing){ singleMode = false; playSection(secIdx >= ORDER.length-1 && !paused ? 0 : secIdx); return; }
-  if(paused){ synth.resume(); paused = false; }
-  else { synth.pause(); paused = true; }
-  updateUI();
-};
-$("stopBtn").onclick = stopAll;
-$("nextBtn").onclick = ()=>{ singleMode = false; playSection(secIdx+1); };
-$("prevBtn").onclick = ()=>{ singleMode = false; playSection(secIdx-1); };
-$("rateSel").onchange = $("voiceSel").onchange = ()=>{ if(playing && !paused){ const s=singleMode; playSection(secIdx); singleMode=s; } };
-
-document.addEventListener("click", e=>{
-  const b = e.target.closest("[data-listen]"); if(!b) return;
-  singleMode = true; playSection(ORDER.indexOf(b.dataset.listen));
+/* ---------- Render ---------- */
+let curT = 0, curM = -1;
+const topicList = document.getElementById("topicList"), stage = document.getElementById("stage");
+topicList.innerHTML = TOPICS.map((t,i)=>`
+  <button class="topic" data-t="${i}" id="topic-${i}">
+    <span class="code">${esc(t.code)}</span>
+    <span class="name">${esc(t.name)}</span>
+    <span class="meta">${t.mods.length} modul · ${LEVELS[0].name} → ${LEVELS.at(-1).name}</span>
+  </button>`).join("");
+topicList.addEventListener("click", e=>{
+  const b = e.target.closest(".topic"); if(!b) return;
+  stopAll(); const id = runId;
+  showTopic(+b.dataset.t, -1);
+  say(TOPICS[curT].say + " Klik salah satu modul, atau tekan Putar topik ini untuk mendengar seluruh modul.", id);
 });
 
-/* Chrome kadang menghentikan suara panjang: jaga tetap hidup */
-setInterval(()=>{ if(synth && playing && !paused && synth.speaking){ synth.pause(); synth.resume(); } }, 10000);
+function showTopic(t, m){
+  curT = t; curM = m;
+  document.querySelectorAll(".topic").forEach((el,i)=>el.classList.toggle("active", i===t));
+  const T = TOPICS[t], n = T.mods.length;
+  const nodes = T.mods.map((md,i)=>{
+    const L = LEVELS[lvOf(i)];
+    return `<button class="node ${i===m?'on':''} ${m>=0&&i<m?'done':''}" data-m="${i}" style="--c:${L.c}" aria-label="${esc(md.code)} ${esc(md.name)}">
+      <span class="dot">${pad(i)}</span><span class="lbl">${esc(md.name)}</span></button>`;
+  }).join("");
+  const flowW = m<=0 ? 0 : `calc(${m/(n-1)} * (100% - 60px))`;
+  const zones = LEVELS.map(l=>`<span class="zone" style="left:calc(6px + ${l.from/n*100}%);color:${l.c}">${esc(l.name)}</span>`).join("");
+  stage.innerHTML = `
+    <div class="stage-head">
+      <div class="t">
+        <div class="eyebrow">${esc(CFG.topicWord)} ${t+1} dari ${TOPICS.length} · Kode ${esc(T.code)}</div>
+        <h1>${esc(T.name)}</h1>
+        <p class="lead">${esc(T.lead)}</p>
+      </div>
+      <button class="btn-play" id="btnPlayTopic">▶ Putar topik ini</button>
+    </div>
+    <div class="legend">${LEVELS.map(l=>`<span><i style="background:${l.c}"></i>${esc(l.name)} · ${esc(l.range)}</span>`).join("")}</div>
+    <div class="pipe-wrap"><div class="pipe" id="pipe" style="grid-template-columns:repeat(${n},minmax(64px,1fr));min-width:${n*66}px">
+      ${zones}<div class="flow" style="width:${flowW}"></div>${nodes}
+    </div></div>
+    ${m<0 ? `<div class="detail"><div class="box" style="grid-column:1/-1"><h4>Cara memakai</h4>
+      <ul><li>Klik nomor modul pada jalur di atas untuk mendengar penjelasannya.</li>
+      <li>Tekan <b>Putar topik ini</b> untuk narasi otomatis ${n} modul berurutan.</li>
+      <li>Jalur bergerak dari ${esc(LEVELS[0].name)} ke ${esc(LEVELS.at(-1).name)}, sesuai urutan belajar yang disarankan.</li></ul></div></div>` : detailHTML(T, m)}`;
+  stage.querySelector("#pipe").addEventListener("click", e=>{
+    const nd = e.target.closest(".node"); if(!nd) return;
+    stopAll(); const id = runId; showTopic(curT, +nd.dataset.m); say(TOPICS[curT].mods[curM].speak, id);
+  });
+  stage.querySelector("#btnPlayTopic").addEventListener("click", ()=>playTopic(curT));
+  const prev = stage.querySelector("#btnPrev"), next = stage.querySelector("#btnNext");
+  if(prev) prev.addEventListener("click", ()=>{ stopAll(); const id=runId; showTopic(curT, curM-1); say(TOPICS[curT].mods[curM].speak, id); });
+  if(next) next.addEventListener("click", ()=>{ stopAll(); const id=runId; showTopic(curT, curM+1); say(TOPICS[curT].mods[curM].speak, id); });
+}
 
-/* Pembuka */
-function closeSplash(){ $("splash").classList.add("hide"); setTimeout(()=>$("splash").remove(), 700); }
-$("startVoice").onclick = ()=>{ closeSplash(); singleMode = false; playSection(0); };
-$("startSilent").onclick = closeSplash;
+function detailHTML(T, m){
+  const md = T.mods[m], L = LEVELS[lvOf(m)], n = T.mods.length;
+  const block = ([label, val]) => `<h4>${esc(label)}</h4>` + (Array.isArray(val) ? `<ul>${val.map(x=>`<li>${esc(x)}</li>`).join("")}</ul>` : `<p>${esc(val)}</p>`);
+  return `<div class="detail" style="--c:${L.c}">
+    <div>
+      <div class="code-l">${esc(md.code)}</div>
+      <h3>${esc(md.name)}</h3>
+      <span class="pill">${esc(L.name)}</span>
+      ${md.descLabel ? `<span class="dlabel">${esc(md.descLabel)}</span>` : ""}
+      <p>${esc(md.desc)}</p>
+      <div class="navrow">
+        ${m>0?`<button class="btn-ghost" id="btnPrev">← Modul sebelumnya</button>`:""}
+        ${m<n-1?`<button class="btn-ghost" id="btnNext">Modul berikutnya →</button>`:""}
+      </div>
+    </div>
+    <div class="box">${md.boxes.map(block).join("")}</div>
+  </div>`;
+}
 
-/* Tandai menu aktif saat menggulir */
-const obs = new IntersectionObserver(ents=>{
-  if(playing) return;
-  ents.forEach(en=>{ if(en.isIntersecting) document.querySelectorAll("[data-toc]").forEach(a=>a.classList.toggle("active", a.dataset.toc===en.target.id)); });
-},{rootMargin:"-40% 0px -55% 0px"});
-document.querySelectorAll("section.block").forEach(s=>obs.observe(s));
+async function playTopic(t){
+  stopAll(); const id = runId;
+  showTopic(t, -1);
+  await say(TOPICS[t].say, id);
+  const n = TOPICS[t].mods.length;
+  for(let m=0; m<n; m++){
+    if(id !== runId) return;
+    const L = LEVELS[lvOf(m)];
+    if(L.announce && m === L.from){ await say(L.announce, id); if(id !== runId) return; }
+    showTopic(t, m);
+    await say(TOPICS[t].mods[m].speak, id);
+    await wait(400);
+  }
+  if(id === runId) say(`Itulah ${n} modul ${TOPICS[t].spoken || TOPICS[t].name}. Silakan pilih topik lain di sebelah kiri.`, id);
+}
+
+async function overview(){
+  stopAll(); const id = runId;
+  showTopic(0, -1);
+  await say(CFG.overview, id);
+  for(let t=0; t<TOPICS.length; t++){
+    if(id !== runId) return;
+    showTopic(t, -1);
+    const el = document.getElementById("topic-"+t); el.classList.add("speaking");
+    await say(TOPICS[t].say, id);
+    el.classList.remove("speaking");
+  }
+  if(id !== runId) return;
+  showTopic(0, -1);
+  say(CFG.closing, id);
+}
+
+/* ---------- Controls ---------- */
+const intro = document.getElementById("intro");
+const btnListen = document.getElementById("btnListen");
+const resetListen = ()=>{ btnListen.setAttribute("aria-pressed","false"); btnListen.textContent="🔊 Dengarkan pembukaan"; };
+btnListen.addEventListener("click", async ()=>{
+  if(btnListen.getAttribute("aria-pressed")==="true"){ stopAll(); resetListen(); return; }
+  stopAll(); const id = runId;
+  btnListen.setAttribute("aria-pressed","true"); btnListen.textContent="■ Hentikan narasi";
+  for(const line of I.speech){ if(id!==runId) break; await say(line, id); }
+  if(id===runId) resetListen();
+});
+document.getElementById("btnStart").addEventListener("click", ()=>{
+  stopAll(); resetListen();
+  intro.classList.add("gone"); setTimeout(()=>intro.hidden=true, 700);
+  overview();
+});
+document.getElementById("btnOverview").addEventListener("click", ()=>{
+  stopAll(); intro.hidden = false; intro.scrollTop = 0;
+  const bl = document.getElementById("bigLogo"); bl.style.animation="none"; void bl.offsetWidth; bl.style.animation="";
+  requestAnimationFrame(()=>intro.classList.remove("gone"));
+  capText.textContent = "Tekan Dengarkan pembukaan untuk mendengar narasi, atau Masuk untuk membuka katalog modul.";
+});
+document.getElementById("btnStop").addEventListener("click", ()=>{ stopAll(); capText.textContent = "Narasi dihentikan. Klik modul untuk melanjutkan."; });
+const bm = document.getElementById("btnMute");
+bm.addEventListener("click", ()=>{
+  muted = !muted; bm.setAttribute("aria-pressed", muted);
+  bm.textContent = muted ? "🔇 Suara mati (subtitle saja)" : "🔊 Suara aktif";
+  if(muted && synth) synth.cancel();
+});
+if(!synth){ capText.textContent = "Browser ini tidak mendukung suara otomatis. Narasi tampil sebagai subtitle."; }
+showTopic(0, -1);
 </script>
-</body>
-</html>
+
+</body></html>
